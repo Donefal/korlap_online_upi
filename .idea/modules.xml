@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/korlap_online_upi.iml" filepath="$PROJECT_DIR$/korlap_online_upi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/korlap_online_upi_android.iml" filepath="$PROJECT_DIR$/android/korlap_online_upi_android.iml" />
+    </modules>
+  </component>
+</project>

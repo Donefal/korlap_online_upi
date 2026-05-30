@@ -1,0 +1,1 @@
+// Untuk export komponen 
