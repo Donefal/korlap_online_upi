@@ -47,69 +47,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _isLoginLoading = false;
-
-  // Fungsi simulasi proses login
-  void _handleLogin() async {
-    setState(() {
-      _isLoginLoading = true;
-    });
-
-    // Simulasi jeda waktu memanggil API
-    await Future.delayed(const Duration(seconds: 2));
-
-    setState(() {
-      _isLoginLoading = false;
-    });
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Login Berhasil!')),
-    );
-  }
+  
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Reusable Button Demo')),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('anvbar')),
+
+      body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          //
+          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+          // action in the IDE, or press "p" in the console), to see the
+          // wireframe for each widget.
+          mainAxisAlignment: .center,
           children: [
-            ButtonAction(
-              width: 200,
-              text: 'Login',
-              isLoading: _isLoginLoading,
-              onPressed: _handleLogin,
-            ),
-            
-            const SizedBox(height: 40),
-            
-            ButtonAction(
-              // text: 'Ke Halaman Profil',
-              icon: Icons.person,
-              backgroundColor: const Color.fromARGB(255, 195, 255, 249),
-              onPressed: () {
-                print('Pindah menu dieksekusi');
-              },
-            ),
-
-            ButtonAction(
-              text: 'Ke Halaman Profil',
-              icon: Icons.face,
-              backgroundColor: const Color.fromARGB(255, 195, 255, 249),
-              onPressed: () {
-                // Logika pindah halaman
-                /* Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
-                );
-                */
-                print('Pindah menu dieksekusi');
-              },
-            ),
-
             
           ],
         ),
