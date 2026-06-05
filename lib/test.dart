@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
 
 /*
@@ -80,12 +81,27 @@ class _TestPageState extends State<TestPage> {
               text: 'test',
               icon: Icons.face,
               posisi: Alignment.centerRight,
-              margin: const EdgeInsets.only(top: 100, left: 20, right: 50, bottom: 40),
+              margin: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
               onPressed:() {
                 print('Pindah menu dieksekusi');
               },
             ),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ButtonMenu( text: 'Home', icon: Icons.home, 
+                  onPressed: () {},
+                ),
+                ButtonMenu(text: 'Notifikasi', icon: Icons.notifications,
+                  onPressed: () {},
+                ),
+                ButtonMenu( text: 'Pengaturan', icon: Icons.settings,
+                  onPressed: () {},
+                ),
+              ],
+            )
+            
+            
 
             ]
           ),
