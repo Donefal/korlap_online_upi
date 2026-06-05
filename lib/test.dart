@@ -12,11 +12,33 @@ class TestPage extends StatefulWidget {
   const TestPage({super.key});
 
   @override
-   State<TestPage> createState() => _TestPageState();
-
+  State<TestPage> createState() => _TestPageState();
 }
 
 class _TestPageState extends State<TestPage> {
+  
+  bool _isLoginLoading = false;
+
+  // Fungsi simulasi proses login
+  void _handleLogin() async {
+    setState(() {
+      _isLoginLoading = true;
+    });
+
+    // Simulasi jeda waktu memanggil API
+    await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      _isLoginLoading = false;
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Login Berhasil!')),
+    );
+  }
+
+
+
   TextEditingController test = TextEditingController();
 
   @override
@@ -44,8 +66,25 @@ class _TestPageState extends State<TestPage> {
                 FormBar(formCtrl: test, formLabel: "Ukuran 2", size: 2,),
                 FormBar(formCtrl: test, formLabel: "Ukuran 2", size: 2, iconChoice: IconChoice.nim,),
               ],
-            )
+            ),
             
+
+            ButtonAction(
+              text: 'Login',
+              isLoading: _isLoginLoading,
+              onPressed: _handleLogin,
+            ),
+
+            ButtonAction(
+              width: 200,
+              text: 'test',
+              icon: Icons.face,
+              posisi: Alignment.centerRight,
+              margin: const EdgeInsets.only(top: 100, left: 20, right: 50, bottom: 40),
+              onPressed:() {
+                print('Pindah menu dieksekusi');
+              },
+            ),
 
 
             ]
