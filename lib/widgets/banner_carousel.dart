@@ -20,9 +20,7 @@ contoh :
       )
     ]
   )
-
 */
-
 
 class BannerCarousel extends StatefulWidget {
   final List<BannerItem> banners;

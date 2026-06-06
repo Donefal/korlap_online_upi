@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class ButtonMenu extends StatelessWidget {
   final String text;
+  final String desc;
   final VoidCallback onPressed;
   final IconData icon;
   final bool isLoading;
   final Color backgroundColor;
   final Color textColor;
-  final double? width;
   final double height;
   final Alignment posisi;
   final EdgeInsetsGeometry margin;
@@ -25,16 +25,17 @@ class ButtonMenu extends StatelessWidget {
   /// - **height**: Tinggi kustom tombol (default: 72 agar proporsional secara vertikal)
   /// - **posisi**: Penyelarasan posisi objek tombol di dalam layar (default: Alignment.topCenter)
   /// - **margin**: Jarak aman luar tombol (default: bottom 20)
+  
   const ButtonMenu({
     super.key,
     required this.text,
+    required this.desc,
     required this.onPressed,
     required this.icon,
     this.isLoading = false,
-    this.backgroundColor = const Color.fromARGB(255, 0, 128, 255),
-    this.textColor = Colors.white,
-    this.width = 100,
-    this.height = 90, 
+    this.backgroundColor = Colors.white,
+    this.textColor = const Color.fromARGB(255, 0, 128, 255),
+    this.height = 100, 
     this.posisi = Alignment.topCenter,
     this.margin = const EdgeInsets.only(bottom: 20),
   });
@@ -55,10 +56,11 @@ class ButtonMenu extends StatelessWidget {
   Widget _buildButtonContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: textColor, size: 26),
-        const SizedBox(height: 6), // Jarak antara ikon dan teks
+        const SizedBox(height: 2), // Jarak antara ikon dan teks
         Flexible(
           child: Text(
             text,
@@ -67,7 +69,18 @@ class ButtonMenu extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontSize: 14, // Ukuran teks dibuat lebih kecil (default sebelumnya 16)
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        Flexible(
+          child: Text(
+            desc,
+            maxLines: 2,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 10, // Ukuran teks dibuat lebih kecil (default sebelumnya 16)
+              fontWeight: FontWeight.w300,
             ),
           ),
         ),
@@ -77,18 +90,20 @@ class ButtonMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double halfWidth = MediaQuery.of(context).size.width / 2 - 20;
     return Padding(
       padding: margin,
       child: Align(
         alignment: posisi,
         child: SizedBox(
-          width: width,
+          width: halfWidth,
           height: height,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              alignment: Alignment.topLeft,
               backgroundColor: backgroundColor,
               elevation: isLoading ? 0 : 2,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
