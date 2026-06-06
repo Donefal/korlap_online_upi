@@ -107,7 +107,11 @@ class _TestPageState extends State<TestPage> {
             AppDropDown(
               ddCtrl: test, 
               data: dataList
-            )
+            ),
+
+            AppText(text: "Text biasa"),
+            AppText(text: "Text subheader", mode:TextMode.subheader),
+            AppText(text: "Text header", mode:TextMode.header)
 
             ]
           ),

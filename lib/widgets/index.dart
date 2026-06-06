@@ -2,3 +2,5 @@
 export 'form_bar.dart';
 export 'button_aksi.dart'; 
 export 'navbar.dart';
+export 'dropdown.dart';
+export 'text.dart';

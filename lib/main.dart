@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'widgets/index.dart';
 import 'package:korlap_online_upi/test.dart';
 
 void main() {
