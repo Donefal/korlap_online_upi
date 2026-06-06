@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 // Model untuk menyimpan data setiap banner
 class BannerItem {

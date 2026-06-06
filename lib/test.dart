@@ -55,7 +55,7 @@ class _TestPageState extends State<TestPage> {
 
   TextEditingController test = TextEditingController();
   List<String> dataList = ["data1", "data2", "data3"];
-  int _index = 0;
+  final int _index = 0;
 
   @override
   Widget build(BuildContext context) {
