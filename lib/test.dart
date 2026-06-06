@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:korlap_online_upi/widgets/button_menu.dart';
-import 'package:korlap_online_upi/widgets/dropdown.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
+import 'package:korlap_online_upi/models/banner_item.dart';
 
 /*
   Script ini dikhususkan untuk melakukan testing dengan widget yang sudah dibuat
@@ -48,12 +47,33 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppNavbar(),
-      body: Center(
+      
+      body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(10),
           child: Column(
             children: [
             // TODO Insert Tested widgets here
+
+            BannerCarousel(
+            height: 220, // Tinggi fiks untuk semua banner
+            banners: [
+              BannerItem(
+                text: "Promo Diskon 50% Hari Ini!",
+                backgroundColor: Colors.blueAccent, // Menggunakan Warna
+              ),
+              BannerItem(
+                text: "Koleksi Terbaru Musim Panas",
+                imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8", // Menggunakan Gambar
+              ),
+              BannerItem(
+                text: "Gratis Ongkir ke Seluruh Indonesia",
+                backgroundColor: Colors.orange,
+              ),
+              BannerItem(text: "Ini tambahan dari urang", backgroundColor: Colors.blueAccent)
+            ],
+          ),
+
 
             FormBar(formCtrl: test),
             FormBar(formCtrl: test, formLabel: "Password", passwordText: true,),
