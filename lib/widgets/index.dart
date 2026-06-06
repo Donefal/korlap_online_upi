@@ -8,3 +8,4 @@ export 'text.dart';
 export 'banner_carousel.dart';
 export 'auth_gate.dart';
 export 'navbar_bawah.dart';
+export 'list_gedung.dart';

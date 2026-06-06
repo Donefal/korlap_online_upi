@@ -4,6 +4,7 @@ enum TextMode {
   paragraph,
   header,
   subheader,
+  subheaderbesar
 }
 
 class AppText extends StatefulWidget {
@@ -40,6 +41,7 @@ class _DropDownState extends State<AppText> {
       TextMode.paragraph => 13,
       TextMode.subheader => 16,
       TextMode.header => 26,
+      TextMode.subheaderbesar => 20
     };
   }
 
@@ -47,6 +49,7 @@ class _DropDownState extends State<AppText> {
     return switch (widget.mode) {
       TextMode.paragraph => FontWeight.w400,
       TextMode.subheader => FontWeight.w500,
+      TextMode.subheaderbesar => FontWeight.w500,
       TextMode.header => FontWeight.w700
     };
   }

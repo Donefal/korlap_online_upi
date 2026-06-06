@@ -8,7 +8,19 @@ import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
   tanpa menggangu page utama.
 
   Panggil di main.dart pada MaterialApp(home: )
+  
 */
+
+
+const RuanganItem testItem = RuanganItem(
+  id: 1,
+  gedung: 'FPMIPA',
+  lantai: 3,
+  namaRuangan: 'Lab Rekayasa Perangkat Lunak',
+  status: 'tersedia',
+  jenisRuangan: 'Laboratorium',
+  onPinjam: null,
+);
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});
@@ -139,8 +151,10 @@ class _TestPageState extends State<TestPage> {
 
             AppText(text: "Text biasa"),
             AppText(text: "Text subheader", mode:TextMode.subheader),
-            AppText(text: "Text header", mode:TextMode.header)
+            AppText(text: "Text header", mode:TextMode.header),
 
+            
+            RuanganCard(item: testItem),
             ]
           ),
         )
