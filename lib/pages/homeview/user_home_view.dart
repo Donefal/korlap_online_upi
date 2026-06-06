@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/models/banner_item.dart';
-import 'package:korlap_online_upi/widgets/button_aksi.dart';
 import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/banner_carousel.dart';
@@ -36,7 +35,7 @@ class _UserHomeViewState extends State<UserHomeView> {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 60),
 
             BannerCarousel(
               height: 350,
@@ -61,36 +60,44 @@ class _UserHomeViewState extends State<UserHomeView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ButtonMenu(
+                Expanded(child:
+                  ButtonMenu(
                   text: "Pinjam Ruangan",
+                  desc: "Pinjam Ruangan",
                   icon: Icons.meeting_room,
                   margin: EdgeInsets.zero,
-                  desc: "Pinjam Ruangan",
                   onPressed: () {
                     print("Menuju Halaman Peminjaman Ruangan");
                     //TODO: Navigasi ke page Peminjaman Ruangan
                   },
                 ),
-                ButtonMenu(
-                  text: "Status Peminjaman",  
+                ),
+
+                Expanded(child:
+                  ButtonMenu(
+                  text: "Status Peminjaman",
+                  desc: "Status Peminjaman",
                   icon: Icons.assignment_turned_in,
                   margin: EdgeInsets.zero,
-                  desc: "Status Peminjaman",
                   onPressed: () {
                     print("Menuju ke halaman Status Peminjaman");
                     //TODO: Navigasi ke halaman status peminjaman
                   },
                 ),
-                ButtonMenu(
-                  text: "Histori Peminjaman",  
+                ),
+
+                Expanded(child:
+                  ButtonMenu(
+                  text: "Histori Peminjaman",                    
+                  desc: "Histori Peminjaman",
                   icon: Icons.history,
                   margin: EdgeInsets.zero,
-                  desc: "Histori Peminjaman",
                   onPressed: () {
                     print("Menuju halaman Histori");
                     //TODO: Navigasi ke halaman histori
                   },
                 ),
+                )
               ],
             ),
           ],
