@@ -27,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar : const AppNavbar (),
-
       body: Center(
         child: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
@@ -39,11 +38,16 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const Text ("Login", 
+                textAlign:TextAlign.center,
+                style: TextStyle(fontSize: 20, 
+                fontWeight: FontWeight.bold,
+                color:Colors.black87,),),
                 const SizedBox(height: 20), 
               
                 FormBar(
                   formCtrl: _nimController,
-                  formLabel: "NIM/Email UPI",
+                  formLabel: "NIM/NIP",
                   formIcon: FormIcon.nim,
                   size: 3,
                 ),
