@@ -11,6 +11,7 @@ class SessionProvider extends ChangeNotifier {
   bool get isAdmin     => _role == 'admin';
   bool get isUser      => _role == 'user';
 
+  // TODO: Login nanti konek ke database dlu untuk ambil token (id user) sama role nya (admin atau user)
   Future<void> login(String token, String role) async {
     _token = token;
     _role = role;
