@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       //TODO: Nanti ini diganti ke AuthGate() default nya 
       
       // TestPage() untuk nge test page
-      home: const TestPage(),
+      home: const AuthGate(),
     );
   }
 }

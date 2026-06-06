@@ -18,14 +18,25 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
     const String appTitle = "Korlap Online";
 
     return AppBar(
-      title: const Text(appTitle),
-      backgroundColor: Color.fromARGB(255, 0, 128, 255),
-      foregroundColor: Colors.white,
+      elevation: 0,
+      title: const Text(
+        appTitle,
+        style: TextStyle(fontWeight: FontWeight.w700)
+      ),
+      backgroundColor: Colors.transparent,
       actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.person),
-          tooltip: "Account Settings",
-          onPressed: () => _navigateToAccountMenu(context), 
+        Container(
+          margin: const EdgeInsets.only(right: 12),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            shape: BoxShape.circle,
+          ),
+
+          child: IconButton(
+            icon: const Icon(Icons.person),
+            color: Colors.white,
+            onPressed: () {},
+          ),
         ),
 
         SizedBox(width: 10,)
