@@ -132,13 +132,10 @@ class _TestPageState extends State<TestPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ButtonMenu( text: 'Home', icon: Icons.home, 
+                ButtonMenu( text: 'Home', icon: Icons.home, desc: "rumah pulang ke dalam rumah aku hore oke oke mantap",
                   onPressed: () {},
                 ),
-                ButtonMenu(text: 'Notifikasi', icon: Icons.notifications,
-                  onPressed: () {},
-                ),
-                ButtonMenu( text: 'Pengaturan', icon: Icons.settings,
+                ButtonMenu(text: 'Notifikasi', icon: Icons.notifications, desc: "pesan",
                   onPressed: () {},
                 ),
               ],
