@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:korlap_online_upi/pages/login/login_page.dart';
-import 'widgets/index.dart';
-import 'package:korlap_online_upi/test.dart';
+import 'package:korlap_online_upi/session_provider.dart';
+import 'package:korlap_online_upi/widgets/auth_gate.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final session = SessionProvider();
+  await session.restore();
+
+  runApp(
+    ChangeNotifierProvider.value(
+      value: session,
+      child: const MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Korlap Digital (Kodig)',
+      debugShowCheckedModeBanner: false,
+      home: const AuthGate(),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,7 +46,6 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const TestPage(),
     );
   }
 }
@@ -80,3 +92,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

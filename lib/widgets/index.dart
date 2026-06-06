@@ -6,3 +6,4 @@ export 'navbar.dart';
 export 'dropdown.dart';
 export 'text.dart';
 export 'banner_carousel.dart';
+export 'auth_gate.dart';
