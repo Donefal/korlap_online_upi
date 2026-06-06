@@ -1,45 +1,43 @@
 import 'package:flutter/material.dart';
 
-class ButtonAction extends StatelessWidget {
-  final String? text;
+class ButtonMenu extends StatelessWidget {
+  final String text;
   final VoidCallback onPressed;
-  final IconData? icon;
+  final IconData icon;
   final bool isLoading;
   final Color backgroundColor;
   final Color textColor;
   final double? width;
-  final double? height;
+  final double height;
   final Alignment posisi;
   final EdgeInsetsGeometry margin;
 
-  /// Custom ButtonAction
+  /// Custom ButtonMenu (Ikon di atas, Teks di bawah)
   /// 
   /// Parameter:
+  /// - **required text**: Teks yang ditampilkan di bawah ikon (ukuran lebih kecil)
   /// - **required onPressed**: Fungsi callback ketika tombol ditekan
-  /// - **text**: Teks yang ditampilkan pada tombol (nullable, jika null tombol hanya menampilkan ikon)
-  /// - **icon**: Ikon pendukung yang diletakkan di sebelah teks (nullable)
-  /// - **isLoading**: Kondisi loading untuk menampilkan progress indicator (default: false, triggernya onpressed) 
+  /// - **required icon**: Ikon utama yang diletakkan di atas teks
+  /// - **isLoading**: Kondisi loading untuk menampilkan progress indicator (default: false)
   /// - **backgroundColor**: Warna latar belakang tombol (default: putih)
   /// - **textColor**: Warna teks dan ikon tombol (default: biru azure)
-  /// - **width**: Lebar kustom tombol, jika null panjangnya otomatis mengikuti teks
+  /// - **width**: Lebar kustom tombol, jika null panjangnya otomatis mengikuti konten
+  /// - **height**: Tinggi kustom tombol (default: 72 agar proporsional secara vertikal)
   /// - **posisi**: Penyelarasan posisi objek tombol di dalam layar (default: Alignment.topCenter)
   /// - **margin**: Jarak aman luar tombol (default: bottom 20)
-  
-  const ButtonAction({
+  const ButtonMenu({
     super.key,
+    required this.text,
     required this.onPressed,
-    this.text,
-    this.icon,
+    required this.icon,
     this.isLoading = false,
     this.backgroundColor = Colors.white,
     this.textColor = const Color.fromARGB(255, 0, 128, 255),
-    this.width,
-    this.height,
-    this.posisi = Alignment.center,
+    this.width = 80,
+    this.height = 72, 
+    this.posisi = Alignment.topCenter,
     this.margin = const EdgeInsets.only(bottom: 20),
   });
-
-  
 
   // Helper method untuk membangun indikator loading
   Widget _buildLoadingIndicator() {
@@ -53,29 +51,26 @@ class ButtonAction extends StatelessWidget {
     );
   }
 
-  // Helper method untuk membangun konten normal (Ikon & Teks)
+  // Helper method untuk membangun konten Vertikal (Ikon di atas, Teks di bawah)
   Widget _buildButtonContent() {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (icon != null) 
-          Icon(icon, color: textColor, size: 20),
-        if (icon != null && text != null) 
-          const SizedBox(width: 8),
-        if (text != null)
-          Flexible(
-            child: Text(
-              text!,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+        Icon(icon, color: textColor, size: 24),
+        const SizedBox(height: 6), // Jarak antara ikon dan teks
+        Flexible(
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 12, // Ukuran teks dibuat lebih kecil (default sebelumnya 16)
+              fontWeight: FontWeight.w600,
             ),
           ),
+        ),
       ],
     );
   }
@@ -93,7 +88,7 @@ class ButtonAction extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: backgroundColor,
               elevation: isLoading ? 0 : 2,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
