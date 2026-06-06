@@ -45,6 +45,7 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppNavbar(),
       body: Center(
         child: Container(
           margin: EdgeInsets.all(10),
