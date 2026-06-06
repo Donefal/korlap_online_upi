@@ -31,10 +31,10 @@ class ButtonMenu extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.isLoading = false,
-    this.backgroundColor = Colors.white,
-    this.textColor = const Color.fromARGB(255, 0, 128, 255),
-    this.width = 80,
-    this.height = 72, 
+    this.backgroundColor = const Color.fromARGB(255, 0, 128, 255),
+    this.textColor = Colors.white,
+    this.width = 100,
+    this.height = 90, 
     this.posisi = Alignment.topCenter,
     this.margin = const EdgeInsets.only(bottom: 20),
   });
@@ -57,7 +57,7 @@ class ButtonMenu extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, color: textColor, size: 24),
+        Icon(icon, color: textColor, size: 26),
         const SizedBox(height: 6), // Jarak antara ikon dan teks
         Flexible(
           child: Text(
@@ -66,8 +66,8 @@ class ButtonMenu extends StatelessWidget {
             maxLines: 1,
             style: TextStyle(
               color: textColor,
-              fontSize: 12, // Ukuran teks dibuat lebih kecil (default sebelumnya 16)
-              fontWeight: FontWeight.w600,
+              fontSize: 14, // Ukuran teks dibuat lebih kecil (default sebelumnya 16)
+              fontWeight: FontWeight.w800,
             ),
           ),
         ),
