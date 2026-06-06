@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 FormBar(
                   formCtrl: _nimController,
                   formLabel: "NIM/Email UPI",
-                  iconChoice: IconChoice.nim,
+                  formIcon: FormIcon.nim,
                   size: 3,
                 ),
               

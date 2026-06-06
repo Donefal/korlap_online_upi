@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/session_provider.dart';
+import 'package:korlap_online_upi/test.dart';
 import 'package:korlap_online_upi/widgets/auth_gate.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Korlap Digital (Kodig)',
       debugShowCheckedModeBanner: false,
-      home: const AuthGate(),
+
+      //TODO: Nanti ini diganti ke AuthGate() default nya 
+      
+      // TestPage() untuk nge test page
+      home: const TestPage(),
     );
   }
 }

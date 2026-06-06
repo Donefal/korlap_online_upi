@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/dropdown.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
+import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
 
 /*
   Script ini dikhususkan untuk melakukan testing dengan widget yang sudah dibuat
@@ -43,11 +44,18 @@ class _TestPageState extends State<TestPage> {
 
   TextEditingController test = TextEditingController();
   List<String> dataList = ["data1", "data2", "data3"];
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppNavbar(),
+      bottomNavigationBar: AppBottomNav(
+        currentIndex: 0, 
+        onDestinationSelected: (index) {setState(() {
+          
+        });},
+      ),
       body: Center(
         child: Container(
           margin: EdgeInsets.all(10),
