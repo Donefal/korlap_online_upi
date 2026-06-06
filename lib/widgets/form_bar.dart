@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum IconChoice {
+enum FormIcon {
   none,
   nim,
 }
@@ -11,7 +11,7 @@ class FormBar extends StatefulWidget {
   final bool passwordText;
   final int size;
   final double margin;
-  final IconChoice iconChoice;
+  final FormIcon formIcon;
 
   /// Custom FormBar 
   /// 
@@ -23,7 +23,7 @@ class FormBar extends StatefulWidget {
   ///   - size=1 : Untuk satu row muat 3 widget
   ///   - size=2 : Untuk satu row muat 2 widget
   ///   - size=3 : Untuk satu row muat 1 widget
-  /// - **iconChoice** : Pilih icon sesuai kebutuhan dengan iconChoice.pilihan (default: iconChoice.none)
+  /// - **FormIcon** : Pilih icon sesuai kebutuhan dengan FormIcon.pilihan (default: FormIcon.none)
   const FormBar(
     {
       super.key, 
@@ -32,7 +32,7 @@ class FormBar extends StatefulWidget {
       this.passwordText = false,
       this.size = 3,
       this.margin = 5,
-      this.iconChoice = IconChoice.none
+      this.formIcon = FormIcon.none
       }
   );
 
@@ -61,9 +61,9 @@ class _FormBarState extends State<FormBar> {
   Icon? _tentukanIcon() {
     if (widget.passwordText) return const Icon(Icons.password); 
 
-    return switch (widget.iconChoice) {
-      IconChoice.nim  => const Icon(Icons.numbers),
-      IconChoice.none => null,
+    return switch (widget.formIcon) {
+      FormIcon.nim  => const Icon(Icons.numbers),
+      FormIcon.none => null,
     };
   }
 

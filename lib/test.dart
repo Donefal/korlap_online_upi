@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/button_menu.dart';
+import 'package:korlap_online_upi/widgets/dropdown.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
 
 /*
@@ -41,6 +42,7 @@ class _TestPageState extends State<TestPage> {
 
 
   TextEditingController test = TextEditingController();
+  List<String> dataList = ["data1", "data2", "data3"];
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,7 @@ class _TestPageState extends State<TestPage> {
             Row(
               children: [
                 FormBar(formCtrl: test, formLabel: "Ukuran 2", size: 2,),
-                FormBar(formCtrl: test, formLabel: "Ukuran 2", size: 2, iconChoice: IconChoice.nim,),
+                FormBar(formCtrl: test, formLabel: "Ukuran 2", size: 2, formIcon: FormIcon.nim),
               ],
             ),
             
@@ -100,9 +102,12 @@ class _TestPageState extends State<TestPage> {
                   onPressed: () {},
                 ),
               ],
+            ),
+            
+            AppDropDown(
+              ddCtrl: test, 
+              data: dataList
             )
-            
-            
 
             ]
           ),

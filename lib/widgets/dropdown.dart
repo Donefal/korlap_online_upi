@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum IconChoice {
+enum DdIcon {
   none,
   gedung,
   lantai,
@@ -11,7 +11,7 @@ class AppDropDown extends StatefulWidget {
   final String ddLabel;
   final int size;
   final double margin;
-  final IconChoice iconChoice;
+  final DdIcon iconChoice;
   final List<String> data;
 
   /// Custom AppDropDown 
@@ -33,7 +33,7 @@ class AppDropDown extends StatefulWidget {
       this.ddLabel = "Form",
       this.size = 2,
       this.margin = 5,
-      this.iconChoice = IconChoice.none
+      this.iconChoice = DdIcon.none
       }
   );
 
@@ -61,9 +61,9 @@ class _DropDownState extends State<AppDropDown> {
   
   Icon? _tentukanIcon() {
     return switch (widget.iconChoice) {
-      IconChoice.none => null,
-      IconChoice.gedung  => const Icon(Icons.home_work_sharp),
-      IconChoice.lantai => const Icon(Icons.)
+      DdIcon.none => null,
+      DdIcon.gedung  => const Icon(Icons.home_work_sharp),
+      DdIcon.lantai => const Icon(Icons.flourescent_outlined)
     };
   }
 
