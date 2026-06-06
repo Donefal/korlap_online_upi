@@ -5,3 +5,4 @@ export 'navbar.dart';
 export 'dropdown.dart';
 export 'text.dart';
 export 'auth_gate.dart';
+export 'navbar_bawah.dart';
