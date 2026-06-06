@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/pages/login/login_page.dart';
 import 'widgets/index.dart';
 import 'package:korlap_online_upi/test.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const TestPage(),
+      home: const LoginPage(),
     );
   }
 }
