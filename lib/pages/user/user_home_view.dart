@@ -61,6 +61,7 @@ class _UserHomeViewState extends State<UserHomeView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ButtonMenu(
+                  desc: "Pinjam ruangan untuk keperluanmu",
                   text: "Pinjam Ruangan",
                   icon: Icons.meeting_room,
                   margin: EdgeInsets.zero,
@@ -70,6 +71,7 @@ class _UserHomeViewState extends State<UserHomeView> {
                   },
                 ),
                 ButtonMenu(
+                  desc: "Lihat status peminjamanmu",
                   text: "Status Peminjaman",  
                   icon: Icons.assignment_turned_in,
                   margin: EdgeInsets.zero,
@@ -79,6 +81,7 @@ class _UserHomeViewState extends State<UserHomeView> {
                   },
                 ),
                 ButtonMenu(
+                  desc: "Lihat histori peminjamanmu",
                   text: "Histori Peminjaman",  
                   icon: Icons.history,
                   margin: EdgeInsets.zero,
