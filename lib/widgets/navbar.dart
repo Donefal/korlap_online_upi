@@ -35,7 +35,7 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
           child: IconButton(
             icon: const Icon(Icons.person),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () => _navigateToAccountMenu(context), 
           ),
         ),
 
