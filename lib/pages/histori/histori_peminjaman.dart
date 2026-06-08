@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
 import 'package:korlap_online_upi/widgets/list_gedung.dart';
@@ -11,22 +12,35 @@ class HistoriPeminjamanPage extends StatefulWidget {
 }
 
 class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
-  final List<RuanganItem> _listHistori = [
-    const RuanganItem(
+  final List<PeminjamanItem> _listHistori = [
+    const PeminjamanItem(
       id: 201,
       gedung: "Gedung B",
       lantai: 1,
       namaRuangan: "Ruang Prodi Teknik Komputer",
-      status: "sudah dipinjam",
-      jenisRuangan: "Ruangan Prodi",
+      statusPinjaman: "Diterima",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0),
     ),
-    const RuanganItem(
+
+    const PeminjamanItem(
       id: 202,
       gedung: "Gedung E",
       lantai: 1,
       namaRuangan: "20.4E.01.001",
-      status: "tersedia",
-      jenisRuangan: "Ruang Kelas",
+      statusPinjaman: "Tidak Diterima",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0)
+    ),
+
+    const PeminjamanItem(
+      id: 202,
+      gedung: "Gedung E",
+      lantai: 1,
+      namaRuangan: "20.4E.01.001",
+      statusPinjaman: "Sedang diajukan",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0)
     ),
   ];
 
@@ -93,15 +107,17 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
                         itemBuilder: (context, index) {
                           final itemHistori = _listHistori[index];
 
-                          return RuanganCard(
-                            item: RuanganItem(
+                          return PeminjamanCard(
+                            showAction: false,
+                            item: PeminjamanItem(
                               id: itemHistori.id,
                               gedung: itemHistori.gedung,
                               lantai: itemHistori.lantai,
                               namaRuangan: itemHistori.namaRuangan,
-                              status: itemHistori.status,
-                              jenisRuangan: itemHistori.jenisRuangan,
-                              onPinjam: () {
+                              statusPinjaman: itemHistori.statusPinjaman,
+                              start: itemHistori.start,
+                              end: itemHistori.end,
+                              onAction: () {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/main_gate.dart';
 import 'package:korlap_online_upi/session_provider.dart';
+import 'package:korlap_online_upi/widgets/auth_gate.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color.fromARGB(255, 0, 128, 255),  
+                const Color.fromARGB(255, 0, 128, 255),  
                 const Color.fromARGB(255, 245, 248, 250),  
               ],
             ),
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
       
       // TODO: Nanti ini diganti ke AuthGate() default nya 
       // TestPage() untuk nge test page
-      home: const MainGate(),
+      home: const AuthGate(),
     );
   }
 }

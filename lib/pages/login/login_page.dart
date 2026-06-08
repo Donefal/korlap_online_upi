@@ -1,5 +1,6 @@
 // file: lib/login_page.dart
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/main_gate.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
 
 class LoginPage extends StatefulWidget {
@@ -93,16 +94,11 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() {
                           _isLoginLoading = false;
                         });
-              
-                        print("Login Berhasil");
-              
-                        // TODO: Ganti 'HalamanHome()' dengan kelas page B1 Home Menu nanti
-                        /*
+
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const HalamanHome()),
+                          MaterialPageRoute(builder: (context) => MainGate()),
                         );
-                        */
                       }
                     });
                   }
