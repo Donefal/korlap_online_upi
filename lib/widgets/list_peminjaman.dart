@@ -52,8 +52,9 @@ Color _tentukanColorRuangan(String jenis) {
 class PeminjamanCard extends StatelessWidget {
   final PeminjamanItem  item;
   final bool showAction;
+  final bool showNoActionOnly;
 
-  const PeminjamanCard({super.key, required this.item, this.showAction = true});
+  const PeminjamanCard({super.key, required this.item, this.showAction = true, this.showNoActionOnly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -97,21 +98,25 @@ class PeminjamanCard extends StatelessWidget {
               ),
             ),
 
-            if (showAction)
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: item.yesAction,
-                    icon: const Icon(Icons.check_circle, color: Colors.green),
-                  ),
-
-                  IconButton(
-                    onPressed: item.noAction,
-                    icon: const Icon(Icons.remove_circle, color: Colors.red),
-                  ),
-                ],
+            if (showAction) 
+              SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: item.yesAction,
+                      icon: const Icon(Icons.check_circle, color: Colors.green),
+                    ),
+                
+                    IconButton(
+                      onPressed: item.noAction,
+                      icon: const Icon(Icons.remove_circle, color: Colors.red),
+                    ),
+                  ],
+                ),
               ),
+
+            if (showNoActionOnly) IconButton(onPressed: item.noAction, icon: const Icon(Icons.remove_circle, color: Colors.red))
           ],
         ),
       ),

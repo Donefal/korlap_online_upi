@@ -13,7 +13,6 @@ class AdminActionPage extends StatefulWidget {
 }
 
 class _AdminActionPageState extends State<AdminActionPage> {
-  final int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
                 children: [
                   Expanded(
                     child: ButtonMenu(
-                      text: "Manage pengajuan",
+                      text: "Pengajuan",
                       desc: "Manage pengajuan peminjaman ruangan",
                       icon: Icons.gavel_rounded,
                       margin: EdgeInsets.zero,
@@ -63,7 +62,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
 
                   Expanded(
                     child: ButtonMenu(
-                      text: "Manage akun",
+                      text: "Akun",
                       desc: "Manage akun user dan admin",
                       icon: Icons.manage_accounts_rounded,
                       margin: EdgeInsets.zero,

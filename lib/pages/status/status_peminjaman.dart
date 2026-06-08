@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
-import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'package:korlap_online_upi/widgets/list_gedung.dart';
+import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 
 class StatusPeminjamanPage extends StatefulWidget {
   const StatusPeminjamanPage({super.key});
@@ -11,30 +10,35 @@ class StatusPeminjamanPage extends StatefulWidget {
 }
 
 class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
-  final List<RuanganItem> _listAjuanOnGoing = [
-    const RuanganItem(
+  final List<PeminjamanItem> _listAjuan = [
+    const PeminjamanItem(
       id: 101,
       gedung: "Gedung B",
       lantai: 3,
       namaRuangan: "Embedded & Network Laboratory",
-      status: "sudah ada yg mengajukan",
-      jenisRuangan: "Laboratorium",
+      statusPinjaman: "Sedang diajukan",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 14, minute: 0),
     ),
-    const RuanganItem(
+    const PeminjamanItem(
       id: 102,
       gedung: "Gedung B",
       lantai: 3,
       namaRuangan: "20.4B.03.007",
-      status: "sudah dipinjam",
-      jenisRuangan: "Ruang Kelas",
+      statusPinjaman: "Diterima", // this won't show
+      start: TimeOfDay(hour: 9, minute: 0),
+      end: TimeOfDay(hour: 11, minute: 0),
     ),
   ];
+
+  // filter here
+  List<PeminjamanItem> get _listOnGoing =>
+      _listAjuan.where((item) => item.statusPinjaman == "Sedang diajukan").toList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppNavbar(),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(
           right: 20,
@@ -45,9 +49,7 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
         child: Card(
           elevation: 10,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              24.0,
-            ), // Higher number = more rounded
+            borderRadius: BorderRadius.circular(24.0),
           ),
           child: Padding(
             padding: const EdgeInsets.only(
@@ -72,12 +74,12 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
                   ),
                 ),
 
-                _listAjuanOnGoing.isEmpty
+                _listOnGoing.isEmpty
                     ? const Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 32.0),
                           child: Text(
-                            "Tidak ada pengajuan on-going / yang masih valid.",
+                            "Tidak ada pengajuan yang sedang diajukan.",
                             style: TextStyle(
                               color: Colors.grey,
                               fontStyle: FontStyle.italic,
@@ -89,29 +91,12 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         padding: const EdgeInsets.only(bottom: 16),
-                        itemCount: _listAjuanOnGoing.length,
+                        itemCount: _listOnGoing.length,
                         itemBuilder: (context, index) {
-                          final itemAjuan = _listAjuanOnGoing[index];
-
-                          return RuanganCard(
-                            item: RuanganItem(
-                              id: itemAjuan.id,
-                              gedung: itemAjuan.gedung,
-                              lantai: itemAjuan.lantai,
-                              namaRuangan: itemAjuan.namaRuangan,
-                              status: itemAjuan.status,
-                              jenisRuangan: itemAjuan.jenisRuangan,
-                              onPinjam: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Melihat detail status: ${itemAjuan.namaRuangan}",
-                                    ),
-                                    duration: const Duration(seconds: 1),
-                                  ),
-                                );
-                              },
-                            ),
+                          return PeminjamanCard(
+                            item: _listOnGoing[index],
+                            showNoActionOnly: true,
+                            showAction: false,
                           );
                         },
                       ),

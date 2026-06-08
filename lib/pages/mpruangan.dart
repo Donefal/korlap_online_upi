@@ -159,7 +159,7 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      AppText(text: "Peminjaman Ruangan", mode: TextMode.gede),
+                      Center(child: AppText(text: "Peminjaman Ruangan", mode: TextMode.header)),
 
                       const SizedBox(height: 20),
 
@@ -223,8 +223,8 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
                       ),
 
                       AppText(
-                        text: "List Peminjaman Ruangan:",
-                        mode: TextMode.header,
+                        text: "List Pengajuan:",
+                        mode: TextMode.subheaderbesar,
                       ),
 
                       const SizedBox(height: 6),

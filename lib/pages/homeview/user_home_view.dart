@@ -19,8 +19,6 @@ class UserHomeView extends StatefulWidget {
 
 
 class _UserHomeViewState extends State<UserHomeView> {
-  int _currentFooterIndex = 0;
-
   @override
   Widget build(BuildContext context){
     return SingleChildScrollView(
@@ -31,7 +29,7 @@ class _UserHomeViewState extends State<UserHomeView> {
           borderRadius: BorderRadius.circular(24.0), // Higher number = more rounded
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 24.0, left: 24.0, top: 24, bottom: 80),
+          padding: const EdgeInsets.only(right: 24.0, left: 24.0, top: 24, bottom: 50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -63,7 +61,7 @@ class _UserHomeViewState extends State<UserHomeView> {
                   ],
                 ),
           
-                const SizedBox(height: 60),
+                const SizedBox(height: 30),
           
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,7 +69,7 @@ class _UserHomeViewState extends State<UserHomeView> {
                     Expanded(child:
                       ButtonMenu(
                       text: "Pinjam Ruangan",
-                      desc: "Pinjam Ruangan",
+                      desc: "Lakukan peminjaman ruangan",
                       icon: Icons.meeting_room,
                       margin: EdgeInsets.zero,
                       onPressed: () {
@@ -85,8 +83,8 @@ class _UserHomeViewState extends State<UserHomeView> {
           
                     Expanded(child:
                       ButtonMenu(
-                      text: "Status Peminjaman",
-                      desc: "Status Peminjaman",
+                      text: "Status Pengajuan",
+                      desc: "Lihat status pengajuan ruangan",
                       icon: Icons.assignment_turned_in,
                       margin: EdgeInsets.zero,
                       onPressed: () {
@@ -106,8 +104,8 @@ class _UserHomeViewState extends State<UserHomeView> {
                 children: [
                   Expanded(child:
                       ButtonMenu(
-                      text: "Histori Peminjaman",                    
-                      desc: "Histori Peminjaman",
+                      text: "Histori",                    
+                      desc: "Lihat histori peminjaman yang sudah diproses",
                       icon: Icons.history,
                       margin: EdgeInsets.zero,
                       onPressed: () {
