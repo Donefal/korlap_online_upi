@@ -4,7 +4,7 @@ import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/banner_carousel.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'mruangan.dart'; // Mengimpor halaman Manajemen Ruangan Admin yang sudah kita buat
+import 'mruangan.dart'; 
 
 class AdminHomeView extends StatefulWidget {
   const AdminHomeView({super.key});
@@ -14,7 +14,6 @@ class AdminHomeView extends StatefulWidget {
 }
 
 class _AdminHomeViewState extends State<AdminHomeView> {
-  // Secara rancangan sketsa, halaman aksi admin berada di tab index ke-2 (B3)
   int _currentFooterIndex = 2; 
 
   @override
@@ -28,7 +27,7 @@ class _AdminHomeViewState extends State<AdminHomeView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              "Admin Menu", // Diubah dari "Main Menu" agar merepresentasikan sisi Admin
+              "Admin Menu", 
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 35,
@@ -39,7 +38,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
 
             const SizedBox(height: 60),
 
-            // Banner tetap dipertahankan persis sesuai sketsa F1 (Banner selamat datang admin)
             BannerCarousel(
               height: 350,
               banners: [
@@ -60,11 +58,9 @@ class _AdminHomeViewState extends State<AdminHomeView> {
 
             const SizedBox(height: 80),
 
-            // MODIFIKASI TOMBOL MENU UTAMA (C1, C2, C3 dst.) MENJADI AKSI KELOLA ADMIN
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // 1. Tombol Manajemen/Kelola Ruangan (Mengarah ke file mruangan.dart)
                 Expanded(
                   child: ButtonMenu(
                     text: "Kelola Ruangan",
@@ -83,7 +79,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
                   ),
                 ),
 
-                // 2. Tombol Validasi/Persetujuan Peminjaman 
                 Expanded(
                   child: ButtonMenu(
                     text: "Persetujuan",
@@ -97,7 +92,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
                   ),
                 ),
 
-                // 3. Tombol Log/Histori Aktivitas Sistem
                 Expanded(
                   child: ButtonMenu(
                     text: "Log Aktivitas",                    

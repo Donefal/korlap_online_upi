@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; // Mengimport komponen kustom kelompok secara mutakhir
+import '../widgets/index.dart'; 
 
-// ==========================================================
-// 1. PAGE D5.1: DAFTAR MANAJEMEN RUANGAN (ADMIN)
-// ==========================================================
 class MRuanganPage extends StatefulWidget {
   const MRuanganPage({super.key});
 
@@ -12,17 +9,14 @@ class MRuanganPage extends StatefulWidget {
 }
 
 class _MRuanganPageState extends State<MRuanganPage> {
-  // Variabel lokal untuk halaman D5.1
-  final int _currentIndex = 2; // Posisi menu Admin Action pada navbar bawah
+  final int _currentIndex = 2;
 
-  // Controller untuk sinkronisasi nilai widget AppDropDown tim kamu
   final TextEditingController gedungFilterCtrl = TextEditingController();
   final TextEditingController lantaiFilterCtrl = TextEditingController();
 
   final List<String> listGedung = ['Gedung A', 'Gedung B', 'Gedung C', 'FPMIPA J'];
   final List<String> listLantai = ['Lantai 1', 'Lantai 2', 'Lantai 3'];
 
-  // Wadah List Jadwal / Data Ruangan (Kotak Besar di D5.1)
   final List<Map<String, dynamic>> _ruanganData = [];
 
   @override
@@ -34,31 +28,25 @@ class _MRuanganPageState extends State<MRuanganPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Menghitung lebar proporsional untuk membagi ButtonAction berdampingan agar pas setengah layar
     double halfWidth = (MediaQuery.of(context).size.width - 42) / 2;
 
     return Scaffold(
-      appBar: const AppNavbar(), // Navigasi Atas dengan tanda panah balik & A1
+      appBar: const AppNavbar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
 
-          // Judul Utama Halaman menggunakan AppText kustom tim
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Manajemen Ruangan", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // =========================================================
-          // STRUKTUR FILTER & AKSI PERSIS SEPERTI GAMBAR D5.1
-          // =========================================================
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                // BARIS 1: DD Gedung & DD Lantai (Menggunakan AppDropDown tim size: 2)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -72,7 +60,7 @@ class _MRuanganPageState extends State<MRuanganPage> {
                         iconChoice: DdIcon.gedung,
                       ),
                     ),
-                    const SizedBox(width: 10), // Jarak sela antar dropdown
+                    const SizedBox(width: 10), 
                     Expanded(
                       child: AppDropDown(
                         ddCtrl: lantaiFilterCtrl,
@@ -87,11 +75,9 @@ class _MRuanganPageState extends State<MRuanganPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // BARIS 2: Tombol "Tambahkan" & "Filter" (Menggunakan ButtonAction tim)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Button Tambahkan untuk berpindah ke Page D5.2
                     ButtonAction(
                       text: "Tambahkan",
                       icon: Icons.add,
@@ -108,7 +94,6 @@ class _MRuanganPageState extends State<MRuanganPage> {
                       },
                     ),
                     const SizedBox(width: 10),
-                    // Button Filter untuk memproses pencarian data
                     ButtonAction(
                       text: "Filter",
                       icon: Icons.search,
@@ -133,9 +118,6 @@ class _MRuanganPageState extends State<MRuanganPage> {
           const SizedBox(height: 16),
           const Divider(thickness: 1, height: 1),
 
-          // =========================================================
-          // BINGKAI KOTAK BESAR "LIST JADWAL" PERSIS SEPERTI GAMBAR D5.1
-          // =========================================================
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -161,7 +143,7 @@ class _MRuanganPageState extends State<MRuanganPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav( // Navigasi Bawah B1, B2, B3
+      bottomNavigationBar: AppBottomNav( 
         currentIndex: _currentIndex,
         onDestinationSelected: (int index) {},
       ),
@@ -169,9 +151,6 @@ class _MRuanganPageState extends State<MRuanganPage> {
   }
 }
 
-// ==========================================================
-// 2. PAGE D5.2: FORMULIR TAMBAHKAN RUANGAN (ADMIN)
-// ==========================================================
 class TambahRuanganPage extends StatefulWidget {
   const TambahRuanganPage({super.key});
 
@@ -180,10 +159,8 @@ class TambahRuanganPage extends StatefulWidget {
 }
 
 class _TambahRuanganPageState extends State<TambahRuanganPage> {
-  // Membuat variabel lokal _currentIndex terpisah khusus untuk halaman D5.2
   final int _currentIndex = 2; 
 
-  // Controller untuk Isian nama, gedung, dan lantai di Page D5.2
   final TextEditingController namaRuanganCtrl = TextEditingController();
   final TextEditingController gedungCtrl = TextEditingController();
   final TextEditingController lantaiCtrl = TextEditingController();
@@ -199,22 +176,18 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppNavbar(), // Navigasi Atas dengan tanda panah balik & A1
+      appBar: const AppNavbar(), 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
 
-          // Judul Halaman Form menggunakan AppText tim
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Tambahkan Ruangan", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // =========================================================
-          // AREA FRAME KOTAK BESAR "ISIAN NAMA, GEDUNG, LANTAI" (D5.2)
-          // =========================================================
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -232,7 +205,6 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Menggunakan FormBar kustom milik timmu (size: 3 untuk full-width)
                             FormBar(
                               formCtrl: namaRuanganCtrl,
                               formLabel: "nama ruangan",
@@ -252,7 +224,6 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
                               formLabel: "lantai",
                               size: 3,
                               margin: 4,
-                              // Parameter formIcon: FormIcon.nim sudah dihapus agar tidak memunculkan tanda pagar (#)
                             ),
                           ],
                         ),
@@ -261,17 +232,14 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
                   ),
                   const SizedBox(height: 12),
 
-                  // =========================================================
-                  // TOMBOL AKSI "TAMBAHKAN" DI SEBELAH KANAN BAWAH KOTAK (D5.2)
-                  // =========================================================
                   ButtonAction(
                     text: "Tambahkan",
                     icon: Icons.check_circle_outline,
                     width: 150,
                     margin: const EdgeInsets.only(bottom: 16),
-                    posisi: Alignment.centerRight, // Mendorong tombol ke kanan sesuai sketsa gambar D5.2
+                    posisi: Alignment.centerRight, 
                     onPressed: () {
-                      Navigator.pop(context); // Kembali ke halaman utama D5.1
+                      Navigator.pop(context); 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Ruangan Baru Berhasil Ditambahkan!")),
                       );
@@ -283,7 +251,7 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav( // Navigasi Bawah B1, B2, B3
+      bottomNavigationBar: AppBottomNav( 
         currentIndex: _currentIndex, 
         onDestinationSelected: (int index) {},
       ),

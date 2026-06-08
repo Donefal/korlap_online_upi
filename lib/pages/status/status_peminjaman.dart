@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-// Import file tempat RuanganCard dan RuanganItem berada agar tidak error
 import 'package:korlap_online_upi/widgets/list_gedung.dart'; 
 
 class StatusPeminjamanPage extends StatefulWidget {

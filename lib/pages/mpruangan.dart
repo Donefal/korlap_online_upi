@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; // Mengimport komponen kustom kelompok secara mutakhir
+import '../widgets/index.dart'; 
 
-// ==========================================
-// 1. PAGE D1.1: DAFTAR PEMINJAMAN RUANGAN (USER)
-// ==========================================
 class MPruanganPage extends StatefulWidget {
   const MPruanganPage({super.key});
 
@@ -12,16 +9,14 @@ class MPruanganPage extends StatefulWidget {
 }
 
 class _MPruanganPageState extends State<MPruanganPage> {
-  final int _currentIndex = 0; // Posisi menu Home / Peminjaman User
+  final int _currentIndex = 0; 
 
-  // Controller untuk sinkronisasi nilai widget AppDropDown tim
   final TextEditingController gedungFilterCtrl = TextEditingController();
   final TextEditingController lantaiFilterCtrl = TextEditingController();
 
   final List<String> listGedung = ['Gedung A', 'Gedung B', 'Gedung C', 'FPMIPA J'];
   final List<String> listLantai = ['Lantai 1', 'Lantai 2', 'Lantai 3'];
 
-  // Wadah List Data Ruangan Peminjaman (Kosong Sesuai Konsep Awal)
   final List<Map<String, dynamic>> _peminjamanData = [];
 
   @override
@@ -33,7 +28,7 @@ class _MPruanganPageState extends State<MPruanganPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Menghitung lebar proporsional untuk membagi ButtonAction berdampingan secara simetris
+
     double halfWidth = (MediaQuery.of(context).size.width - 42) / 2;
 
     return Scaffold(
@@ -43,21 +38,16 @@ class _MPruanganPageState extends State<MPruanganPage> {
         children: [
           const SizedBox(height: 16),
 
-          // Judul Utama Halaman menggunakan AppText kustom tim
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Peminjaman Ruangan", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // =========================================================
-          // FORMASI STRUKTUR LAYOUT DROPDOWN & BUTTON AKSI TIM (D1.1)
-          // =========================================================
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                // BARIS 1: Menampilkan AppDropDown Kelompok (Gedung & Lantai)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -71,7 +61,7 @@ class _MPruanganPageState extends State<MPruanganPage> {
                         iconChoice: DdIcon.gedung,
                       ),
                     ),
-                    const SizedBox(width: 10), // Sela antar dropdown
+                    const SizedBox(width: 10), 
                     Expanded(
                       child: AppDropDown(
                         ddCtrl: lantaiFilterCtrl,
@@ -86,11 +76,9 @@ class _MPruanganPageState extends State<MPruanganPage> {
                 ),
                 const SizedBox(height: 12),
 
-                // BARIS 2: Menampilkan ButtonAction Kelompok (Tambahkan & Filter)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Button Tambahkan kustom tim (Membuka Form D1.2)
                     ButtonAction(
                       text: "Tambahkan",
                       icon: Icons.add,
@@ -107,7 +95,6 @@ class _MPruanganPageState extends State<MPruanganPage> {
                       },
                     ),
                     const SizedBox(width: 10),
-                    // Button Filter kustom tim
                     ButtonAction(
                       text: "Filter",
                       icon: Icons.search,
@@ -132,7 +119,6 @@ class _MPruanganPageState extends State<MPruanganPage> {
           const SizedBox(height: 16),
           const Divider(thickness: 1, height: 1),
 
-          // WADAH TENGAH LIST PEMINJAMAN (Biarkan Kosong Sesuai Konsep)
           Expanded(
             child: _peminjamanData.isEmpty
                 ? const Center(
@@ -156,10 +142,6 @@ class _MPruanganPageState extends State<MPruanganPage> {
     );
   }
 }
-
-// ==========================================
-// 2. PAGE D1.2: TAMBAHKAN PEMINJAMAN (FORM)
-// ==========================================
 class TambahPeminjamanPage extends StatefulWidget {
   const TambahPeminjamanPage({super.key});
 
@@ -168,7 +150,6 @@ class TambahPeminjamanPage extends StatefulWidget {
 }
 
 class _TambahPeminjamanPageState extends State<TambahPeminjamanPage> {
-  // Controller pengisian data form baru peminjaman D1.2
   final TextEditingController namaRuanganCtrl = TextEditingController();
   final TextEditingController gedungCtrl = TextEditingController();
   final TextEditingController lantaiCtrl = TextEditingController();
@@ -190,33 +171,30 @@ class _TambahPeminjamanPageState extends State<TambahPeminjamanPage> {
         children: [
           const SizedBox(height: 16),
 
-          // Judul Halaman Form menggunakan AppText tim
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Tambahkan Peminjaman", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // AREA FORM UTAMA (Bingkai Kotak D1.2)
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
-                  // 1. FRAME KOTAK BESAR ISI FORM BAR TIM
                   Expanded(
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 1.2),
-                        borderRadius: BorderRadius.circular(10), // Serasi dengan kelengkukan widget timmu
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Menggunakan FormBar kustom timmu secara mutakhir (size: 3 = full width)
                             FormBar(
                               formCtrl: namaRuanganCtrl,
                               formLabel: "Nama Ruangan",
@@ -236,7 +214,7 @@ class _TambahPeminjamanPageState extends State<TambahPeminjamanPage> {
                               formLabel: "Posisi Lantai",
                               size: 3,
                               margin: 4,
-                              formIcon: FormIcon.nim, // Meminjam ikon numbers agar estetik untuk penomoran lantai
+                              formIcon: FormIcon.nim, 
                             ),
                           ],
                         ),
@@ -245,7 +223,6 @@ class _TambahPeminjamanPageState extends State<TambahPeminjamanPage> {
                   ),
                   const SizedBox(height: 12),
 
-                  // 2. TOMBOL SIMPAN TAMBAHKAN DI POJOK KANAN BAWAH KOTAK
                   ButtonAction(
                     text: "Tambahkan",
                     icon: Icons.check_circle_outline,

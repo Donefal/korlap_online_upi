@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; // Mengimport komponen kustom kelompok secara mutakhir
+import '../widgets/index.dart'; 
 
-// ==========================================
-// 1. PAGE D3.1: DAFTAR BROADCAST
-// ==========================================
 class BroadcastPage extends StatefulWidget {
   const BroadcastPage({super.key});
 
@@ -12,36 +9,33 @@ class BroadcastPage extends StatefulWidget {
 }
 
 class _BroadcastPageState extends State<BroadcastPage> {
-  // Wadah List Broadcast dibuat kosong sesuai permintaan layout bersih pada sketsa
   final List<Map<String, dynamic>> _broadcastData = [];
-  final int _currentIndex = 1; // Menyesuaikan index navigasi bawah B2
+  final int _currentIndex = 1; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppNavbar(), // Menggunakan widget kustom timmu
+      appBar: const AppNavbar(), 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16), 
 
-          // Judul Utama Halaman menggunakan widget kustom timmu (AppText)
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Broadcast", mode: TextMode.header),
           ),
           const SizedBox(height: 12),
 
-          // BUTTON TAMBAHKAN (Menggunakan ButtonMenu kustom timmu dengan posisi presisi merapat kiri)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                width: 120, // Mempertahankan ukuran lebar tombol mini di kiri agar layout tidak berubah
+                width: 120, 
                 child: ButtonMenu(
                   text: "Tambahkan",
-                  desc: "", // Kosongkan deskripsi agar teks tampil bersih dan pas di dalam tombol
+                  desc: "", 
                   icon: Icons.add,
                   margin: EdgeInsets.zero,
                   onPressed: () {
@@ -59,7 +53,6 @@ class _BroadcastPageState extends State<BroadcastPage> {
           const SizedBox(height: 16),
           const Divider(thickness: 1, height: 1),
 
-          // WADAH TENGAH: Tempat Kotak List Broadcast
           Expanded(
             child: _broadcastData.isEmpty
                 ? const Center(
@@ -81,16 +74,12 @@ class _BroadcastPageState extends State<BroadcastPage> {
       bottomNavigationBar: AppBottomNav(
         currentIndex: _currentIndex, 
         onDestinationSelected: (int index) {
-          // Logika interaksi navigasi kelompokmu
         },
       ),
     );
   }
 }
 
-// ==========================================
-// 2. PAGE D3.2: TAMBAHKAN BROADCAST (FORM)
-// ==========================================
 class TambahBroadcastPage extends StatefulWidget {
   const TambahBroadcastPage({super.key});
 
@@ -113,33 +102,30 @@ class _TambahBroadcastPageState extends State<TambahBroadcastPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppNavbar(), // Menggunakan widget kustom timmu
+      appBar: const AppNavbar(), 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16), 
 
-          // Judul Halaman Form menggunakan widget kustom timmu (AppText)
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Tambahkan Broadcast", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // AREA KONTEN UTAMA (Membentuk Bingkai Kotak Besar Menggantung Sesuai Sketsa D3.2)
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
-                  // 1. FRAME KOTAK BESAR (Wadah Utama Isian Form)
                   Expanded(
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 1.2),
-                        borderRadius: BorderRadius.circular(4), // Sudut tajam khas wireframe sketsa timmu
+                        borderRadius: BorderRadius.circular(4), 
                       ),
                       child: SingleChildScrollView(
                         child: Column(
@@ -162,7 +148,6 @@ class _TambahBroadcastPageState extends State<TambahBroadcastPage> {
                             const SizedBox(height: 6),
                             OutlinedButton.icon(
                               onPressed: () {
-                                // Fitur unggah media visual simulasi kelompok
                               },
                               icon: const Icon(Icons.image, size: 18, color: Colors.black),
                               label: const Text("Pilih Foto/Gambar", style: TextStyle(color: Colors.black, fontSize: 12)),
@@ -191,14 +176,13 @@ class _TambahBroadcastPageState extends State<TambahBroadcastPage> {
                   ),
                   const SizedBox(height: 12), 
 
-                  // 2. TOMBOL TAMBAHKAN (Menggunakan ButtonMenu kustom timmu dengan posisi presisi merapat kanan bawah)
                   Align(
                     alignment: Alignment.centerRight,
                     child: SizedBox(
-                      width: 140, // Lebar proporsional pas diatur lewat kontainer luar
+                      width: 140, 
                       child: ButtonMenu(
                         text: "Tambahkan",
-                        desc: "", // Kosongkan deskripsi agar teks utama terlihat jelas
+                        desc: "", 
                         icon: Icons.check_circle_outline,
                         margin: EdgeInsets.zero,
                         onPressed: () {

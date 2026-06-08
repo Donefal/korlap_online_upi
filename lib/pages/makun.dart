@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; // Mengimport komponen kustom kelompok secara mutakhir (AppNavbar, AppBottomNav, AppText, ButtonMenu)
+import '../widgets/index.dart'; 
 
-// ==========================================
-// 1. PAGE M7: DAFTAR MANAJEMEN AKUN (USER)
-// ==========================================
 class MAkunPage extends StatefulWidget {
   const MAkunPage({super.key});
 
@@ -12,10 +9,9 @@ class MAkunPage extends StatefulWidget {
 }
 
 class _MAkunPageState extends State<MAkunPage> {
-  final int _currentIndex = 2; // Mengunci posisi menu bawah admin (B3)
+  final int _currentIndex = 2; 
   final TextEditingController _searchController = TextEditingController();
 
-  // Data list akun dikosongkan sesuai permintaan layout bersih
   final List<Map<String, dynamic>> _akunData = [];
 
   @override
@@ -27,28 +23,23 @@ class _MAkunPageState extends State<MAkunPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppNavbar(), // Widget kustom tim (Otomatis menangani back button jika ada history)
+      appBar: const AppNavbar(), 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TOMBOL KEMBALI MANUAL DI SINI SUDAH DIHAPUS AGAR TIDAK DOUBLE
+
           const SizedBox(height: 20),
 
-          // Judul Utama: "Manajemen Akun" menggunakan AppText kustom
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: AppText(text: "Manajemen Akun", mode: TextMode.header),
           ),
           const SizedBox(height: 16),
 
-          // =========================================================
-          // FORMASI STRUKTUR LAYOUT (1 DI ATAS, 2 DI BAWAH BERDAMPINGAN)
-          // =========================================================
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                // 1. ATAS: Search Bar Akun memanjang penuh sendirian
                 TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
@@ -65,16 +56,14 @@ class _MAkunPageState extends State<MAkunPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10), // Jarak ke baris bawahnya
+                const SizedBox(height: 10), 
 
-                // 2. BAWAH: Tombol "Tambahkan" & "Filter" Menggunakan Widget Timmu
                 Row(
                   children: [
-                    // Tombol Tambahkan menggunakan ButtonMenu kustom
                     Expanded(
                       child: ButtonMenu(
                         text: "Tambahkan",
-                        desc: "", // Kosongkan agar teks utama rapi dan pas
+                        desc: "", 
                         icon: Icons.add,
                         margin: EdgeInsets.zero,
                         onPressed: () {
@@ -87,13 +76,12 @@ class _MAkunPageState extends State<MAkunPage> {
                         },
                       ),
                     ),
-                    const SizedBox(width: 10), // Jarak horizontal antar tombol
+                    const SizedBox(width: 10), 
 
-                    // Tombol Filter menggunakan ButtonMenu kustom
                     Expanded(
                       child: ButtonMenu(
                         text: "Filter",
-                        desc: "", // Kosongkan agar teks utama rapi dan pas
+                        desc: "", 
                         icon: Icons.filter_list,
                         margin: EdgeInsets.zero,
                         onPressed: () {
@@ -111,7 +99,6 @@ class _MAkunPageState extends State<MAkunPage> {
           const SizedBox(height: 16),
           const Divider(thickness: 1, height: 1),
 
-          // 3. WADAH TENGAH: Tempat List Akun
           Expanded(
             child: _akunData.isEmpty
                 ? const Center(
@@ -159,9 +146,6 @@ class _MAkunPageState extends State<MAkunPage> {
   }
 }
 
-// ==========================================
-// 2. PAGE M8: FORM DETAIL & TAMBAH AKUN BARU
-// ==========================================
 class DetailMAkunPage extends StatefulWidget {
   final bool isNewUser; 
   final Map<String, dynamic>? data;
@@ -207,10 +191,8 @@ class _DetailMAkunPageState extends State<DetailMAkunPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // TOMBOL KEMBALI MANUAL DI SINI JUGA SUDAH DIHAPUS AGAR BERSIH
               const SizedBox(height: 10),
               
-              // Judul Form menggunakan AppText kustom
               AppText(
                 text: widget.isNewUser ? "Tambah Akun Pengguna" : "Detail Pengguna",
                 mode: TextMode.header,
@@ -270,7 +252,6 @@ class _DetailMAkunPageState extends State<DetailMAkunPage> {
               ),
               const SizedBox(height: 28),
               
-              // Tombol Simpan/Perbarui Aksi menggunakan ButtonMenu kustom timmu memanjang penuh
               ButtonMenu(
                 text: widget.isNewUser ? "SIMPAN" : "PERBARUI",
                 desc: "", // Kosongkan agar teks kapital terpusat dengan baik

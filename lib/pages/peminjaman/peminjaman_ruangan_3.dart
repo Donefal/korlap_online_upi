@@ -49,14 +49,12 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
   }
 
 Future<void> _pilihFile(String jenisFile) async {
-    try {
-      // Memanggil picker dokumen
+    {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'png'],
       );
 
-      // Pengecekan null safety yang ramah untuk compiler Flutter Web
       if (result != null && result.files.isNotEmpty) {
         final platformFile = result.files.first;
         final String? namaTerpilih = platformFile.name;
@@ -70,13 +68,7 @@ Future<void> _pilihFile(String jenisFile) async {
             }
           });
         }
-      } else {
-        // User membatalkan pemilihan file
-        print("Pemilihan file $jenisFile dibatalkan oleh user.");
-      }
-    } catch (errorDetail) {
-      // 🔥 FIX: Cetak pesan error asli dari engine browser ke console untuk melacak kendala
-      print("DETAIL ERROR PICKER ASLI: $errorDetail");
+      } 
     }
   }
 
@@ -267,7 +259,6 @@ Future<void> _pilihFile(String jenisFile) async {
     );
   }
 
-  // 🔥 FIX: Mengubah pengecekan if-spread menjadi ternary biasa agar aman dirender di Web
   Widget _buildUploadBox({required String label, required String? fileName, required VoidCallback onTap}) {
     return InkWell(
       onTap: onTap,

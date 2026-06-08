@@ -214,7 +214,6 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
         currentIndex: 0, 
         onDestinationSelected: (int index) {
           if (index == 0) {
-            // Bersihkan semua tumpukan halaman dan paksa kembali ke UserHomeView terdepan
             Navigator.popUntil(context, (route) => route.isFirst);
           } else if (index == 1) {
             ScaffoldMessenger.of(context).showSnackBar(

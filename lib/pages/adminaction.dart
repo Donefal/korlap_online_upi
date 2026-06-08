@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; // Mengimport komponen kustom kelompok secara mutakhir
-import 'mruangan.dart'; // Mengimpor halaman Manajemen Ruangan untuk disambungkan ke D3
+import '../widgets/index.dart'; 
+import 'mruangan.dart'; 
 
 class AdminActionPage extends StatefulWidget {
   const AdminActionPage({super.key});
@@ -10,13 +10,12 @@ class AdminActionPage extends StatefulWidget {
 }
 
 class _AdminActionPageState extends State<AdminActionPage> {
-  // Menentukan indeks navigasi bawah untuk halaman Admin Action (B3)
   final int _currentIndex = 2; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppNavbar(), // Navigasi Atas bawaan tim (A1 di pojok kanan)
+      appBar: const AppNavbar(), 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -24,23 +23,17 @@ class _AdminActionPageState extends State<AdminActionPage> {
           children: [
             const SizedBox(height: 16),
 
-            // Judul Halaman menggunakan AppText kustom tim (Mode Header) sesuai teks sketsa
+      
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.0),
               child: AppText(text: "Admin action", mode: TextMode.header),
             ),
             
             const SizedBox(height: 32),
-
-            // =========================================================================
-            // GRID TOMBOL AKSI ADMIN (D1 - D5) SESUAI TATA LETAK SKETSA IMAGE_CDB0B0.PNG
-            // =========================================================================
             
-            // BARIS 1: Tombol D1, D2, dan D3 Berdampingan
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // D1: Manage Pengajuan Peminjaman Ruangan
                 Expanded(
                   child: ButtonMenu(
                     text: "Manage pengajuan",
@@ -53,9 +46,8 @@ class _AdminActionPageState extends State<AdminActionPage> {
                     },
                   ),
                 ),
-                const SizedBox(width: 12), // Jarak sela horizontal antar tombol
+                const SizedBox(width: 12), 
 
-                // D2: Tambahkan Broadcast
                 Expanded(
                   child: ButtonMenu(
                     text: "Tambahkan broadcast",
@@ -70,7 +62,6 @@ class _AdminActionPageState extends State<AdminActionPage> {
                 ),
                 const SizedBox(width: 12),
 
-                // D3: Manage Ruangan (Dihubungkan langsung ke mruangan.dart)
                 Expanded(
                   child: ButtonMenu(
                     text: "Manage ruangan",
@@ -91,13 +82,11 @@ class _AdminActionPageState extends State<AdminActionPage> {
               ],
             ),
 
-            const SizedBox(height: 16), // Jarak sela vertikal antar baris grid
+            const SizedBox(height: 16), 
 
-            // BARIS 2: Tombol D4 dan D5 (D6 Sudah Dihapus, diganti Box Kosong agar ukuran tetap proporsional)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // D4: Manage Akun User dan Admin
                 Expanded(
                   child: ButtonMenu(
                     text: "Manage akun",
@@ -112,7 +101,6 @@ class _AdminActionPageState extends State<AdminActionPage> {
                 ),
                 const SizedBox(width: 12),
 
-                // D5: Coming Soon
                 Expanded(
                   child: ButtonMenu(
                     text: "Coming soon",
@@ -126,7 +114,6 @@ class _AdminActionPageState extends State<AdminActionPage> {
                 ),
                 const SizedBox(width: 12),
 
-                // Placeholder Transparan untuk menggantikan D6 agar baris kedua tidak rusak/melebar sendirian
                 const Expanded(
                   child: SizedBox.shrink(),
                 ),
@@ -136,11 +123,9 @@ class _AdminActionPageState extends State<AdminActionPage> {
         ),
       ),
 
-      // Navigasi Bawah kustom kelompok (Menampilkan B1, B2, B3)
       bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex, // Index 2 aktif pada menu B3
+        currentIndex: _currentIndex,
         onDestinationSelected: (int index) {
-          // Logika interaksi pindah halaman menu utama tim kamu
         },
       ),
     );
