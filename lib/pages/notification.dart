@@ -65,11 +65,6 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex,
-        onDestinationSelected: (int index) {
-        },
-      ),
     );
   }
 }

@@ -248,14 +248,6 @@ Future<void> _pilihFile(String jenisFile) async {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 0,
-        onDestinationSelected: (int index) {
-          if (index == 0) {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          }
-        },
-      ),
     );
   }
 

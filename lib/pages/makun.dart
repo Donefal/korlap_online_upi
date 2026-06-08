@@ -138,10 +138,6 @@ class _MAkunPageState extends State<MAkunPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex,
-        onDestinationSelected: (int index) {},
-      ),
     );
   }
 }
@@ -262,10 +258,6 @@ class _DetailMAkunPageState extends State<DetailMAkunPage> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 2,
-        onDestinationSelected: (int index) {},
       ),
     );
   }

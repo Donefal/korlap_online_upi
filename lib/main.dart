@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:korlap_online_upi/pages/histori/histori_peminjaman.dart';
-import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
-import 'package:korlap_online_upi/pages/login/login_page.dart';
-import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_1.dart';
-import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
-import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_3.dart';
-import 'package:korlap_online_upi/pages/status/status_peminjaman.dart';
+import 'package:korlap_online_upi/main_gate.dart';
 import 'package:korlap_online_upi/session_provider.dart';
-import 'package:korlap_online_upi/test.dart';
-import 'package:korlap_online_upi/widgets/auth_gate.dart';
-import 'package:korlap_online_upi/widgets/index.dart';
 import 'package:provider/provider.dart';
-import 'session_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,14 +37,13 @@ class MyApp extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color.fromARGB(255, 245, 248, 250),  
                 const Color.fromARGB(255, 73, 179, 255),  
+                const Color.fromARGB(255, 245, 248, 250),  
               ],
             ),
           ),
           child: Theme(
             data: Theme.of(context).copyWith(
-
               scaffoldBackgroundColor: Colors.transparent, 
             ),
             child: child!,
@@ -64,7 +53,7 @@ class MyApp extends StatelessWidget {
       
       // TODO: Nanti ini diganti ke AuthGate() default nya 
       // TestPage() untuk nge test page
-      home: const UserHomeView(),
+      home: const MainGate(),
     );
   }
 }

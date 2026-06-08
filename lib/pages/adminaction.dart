@@ -14,9 +14,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppNavbar(), 
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,13 +119,6 @@ class _AdminActionPageState extends State<AdminActionPage> {
             ),
           ],
         ),
-      ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex,
-        onDestinationSelected: (int index) {
-        },
-      ),
-    );
+      );
   }
 }

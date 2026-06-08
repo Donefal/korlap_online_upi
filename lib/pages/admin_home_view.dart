@@ -109,26 +109,6 @@ class _AdminHomeViewState extends State<AdminHomeView> {
           ],
         ),
       ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentFooterIndex, 
-        onDestinationSelected: (int index) {
-          setState(() {
-            _currentFooterIndex = index;
-          });
-
-          if (index == 0) {
-            print("Admin klik Home User View"); 
-            // TODO: Arahkan balik ke UserHomeView jika admin ingin melihat tampilan biasa (B1)
-          } else if (index == 1) {
-            print("Admin klik Menu Notif"); 
-            // TODO: Ganti ke halaman notification.dart yang kita buat tadi (B2)
-          } else if (index == 2) {
-            print("Admin klik Menu Admin Action");
-            // Tetap di halaman AdminHomeView ini (B3)
-          }
-        },
-      ),
     );
   }
 }

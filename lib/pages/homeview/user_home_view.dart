@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/models/banner_item.dart';
+import 'package:korlap_online_upi/pages/adminaction.dart';
 import 'package:korlap_online_upi/pages/histori/histori_peminjaman.dart';
 import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_1.dart';
 import 'package:korlap_online_upi/pages/status/status_peminjaman.dart';
@@ -15,19 +16,17 @@ class UserHomeView extends StatefulWidget {
   State<UserHomeView> createState() => _UserHomeViewState();
 }
 
+
 class _UserHomeViewState extends State<UserHomeView> {
   int _currentFooterIndex = 0;
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: const AppNavbar(),
-
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
             const Text(
               "Main Menu",
               textAlign: TextAlign.center,
@@ -133,27 +132,6 @@ class _UserHomeViewState extends State<UserHomeView> {
             
           ],
         ),
-      ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentFooterIndex, 
-        onDestinationSelected: (int index) {
-          setState(() {
-            _currentFooterIndex = index;
-          });
-
-          if (index == 0) {
-            print("User klik Home"); 
-            // tetep di Home
-          } else if (index == 1) {
-            print("User klik Menu Notif"); 
-            //TODO: ganti ke halaman notif
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Ntar diatur")),
-            );
-          }
-        },
-      ),
-    );
+      );
   }
 }

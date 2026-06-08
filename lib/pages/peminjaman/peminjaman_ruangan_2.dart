@@ -1,5 +1,7 @@
 // file: lib/pages/peminjaman/detail_peminjaman_page.dart
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/pages/adminaction.dart';
+import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';       
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';  
 import 'package:korlap_online_upi/widgets/button_aksi.dart';   
@@ -7,9 +9,16 @@ import 'package:korlap_online_upi/widgets/list_gedung.dart';
 import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_3.dart';
 
 class DetailPeminjamanPage extends StatelessWidget {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    const UserHomeView(),
+    const AdminActionPage()
+  ];
+
   final RuanganItem ruangan;
 
-  const DetailPeminjamanPage({super.key, required this.ruangan});
+  DetailPeminjamanPage({super.key, required this.ruangan});
 
   @override
   Widget build(BuildContext context) {
@@ -121,15 +130,6 @@ class DetailPeminjamanPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 0, 
-        onDestinationSelected: (int index) {
-          if (index == 0) {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          }
-        },
       ),
     );
   }

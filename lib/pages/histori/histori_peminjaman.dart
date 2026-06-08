@@ -90,19 +90,6 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
           ),
         ],
       ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 0, 
-        onDestinationSelected: (int index) {
-          if (index == 0) {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          } else if (index == 1) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Ntar diatur")),
-            );
-          }
-        },
-      ),
     );
   }
 }

@@ -71,11 +71,6 @@ class _BroadcastPageState extends State<BroadcastPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex, 
-        onDestinationSelected: (int index) {
-        },
-      ),
     );
   }
 }
@@ -200,12 +195,6 @@ class _TambahBroadcastPageState extends State<TambahBroadcastPage> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentIndex,
-        onDestinationSelected: (int index) {
-          // Logika interaksi navigasi kelompokmu
-        },
       ),
     );
   }

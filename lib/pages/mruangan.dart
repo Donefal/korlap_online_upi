@@ -143,10 +143,6 @@ class _MRuanganPageState extends State<MRuanganPage> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBottomNav( 
-        currentIndex: _currentIndex,
-        onDestinationSelected: (int index) {},
-      ),
     );
   }
 }
@@ -250,10 +246,6 @@ class _TambahRuanganPageState extends State<TambahRuanganPage> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: AppBottomNav( 
-        currentIndex: _currentIndex, 
-        onDestinationSelected: (int index) {},
       ),
     );
   }
