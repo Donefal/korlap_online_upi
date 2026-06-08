@@ -81,14 +81,12 @@ class RuanganCard extends StatelessWidget {
                   
                   const SizedBox(height: 8),
 
-                  // Status + jenis chips
-                  Row(
-                    children: [
-                      _buildChip(context, item.status, _tentukanColorStatus(item.status)),
-                      const SizedBox(width: 8),
-                      _buildChip(context, item.jenisRuangan, _tentukanColorRuangan(item.jenisRuangan)),
-                    ],
-                  ),
+                  _buildChip(context, item.status, _tentukanColorStatus(item.status)),
+
+                  const SizedBox(height: 8),
+
+                  _buildChip(context, item.jenisRuangan, _tentukanColorRuangan(item.jenisRuangan)),
+
                 ],
               ),
             ),

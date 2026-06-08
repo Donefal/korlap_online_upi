@@ -79,7 +79,7 @@ class _DropDownState extends State<AppDropDown> {
         child: DropdownMenu<String>(
             controller: widget.ddCtrl,
             label: widget.size == 1 ? null : Text(widget.ddLabel),
-            leadingIcon: _tentukanIcon(),
+            leadingIcon: widget.size == 2 ? null : _tentukanIcon(),
             width: _cariWidth(context) - (widget.margin * 2),
             dropdownMenuEntries: _ddData.map((item) => DropdownMenuEntry<String>(
               value: item,
