@@ -57,6 +57,7 @@ class DetailPeminjamanPage extends StatelessWidget {
                   ),
 
                   RuanganCard(
+                    showNext: false,
                     item: RuanganItem(
                       id: ruangan.id,
                       gedung: ruangan.gedung,

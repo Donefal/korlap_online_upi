@@ -15,32 +15,32 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = "Korlap Online";
+    const Text appTitle = Text("Korlap Online", style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white));
 
-    return AppBar(
-      elevation: 0,
-      title: const Text(
-        appTitle,
-        style: TextStyle(fontWeight: FontWeight.w700)
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 20),
+      child: AppBar(
+        elevation: 0,
+        title: ModalRoute.of(context)?.canPop == true ? null : appTitle,
+        backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(right: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+      
+            child: IconButton(
+              icon: const Icon(Icons.person),
+              color: Colors.blueAccent,
+              onPressed: () => _navigateToAccountMenu(context), 
+            ),
+          ),
+      
+          SizedBox(width: 10,)
+        ],
       ),
-      backgroundColor: Colors.transparent,
-      actions: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(right: 12),
-          decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            shape: BoxShape.circle,
-          ),
-
-          child: IconButton(
-            icon: const Icon(Icons.person),
-            color: Colors.white,
-            onPressed: () => _navigateToAccountMenu(context), 
-          ),
-        ),
-
-        SizedBox(width: 10,)
-      ],
     );
   }
 

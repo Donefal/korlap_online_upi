@@ -28,6 +28,11 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFF5F6FA), 
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.white, 
+          ),
+        ),
       ),
       
       builder: (context, child) {

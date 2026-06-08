@@ -34,8 +34,8 @@ class ButtonMenu extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.isLoading = false,
-    this.backgroundColor = Colors.white,
-    this.textColor = const Color.fromARGB(255, 0, 128, 255),
+    this.backgroundColor = const Color.fromARGB(255, 0, 128, 255),
+    this.textColor = Colors.white ,
     this.height = 100, 
     this.posisi = Alignment.topCenter,
     this.margin = const EdgeInsets.all(20),
@@ -111,6 +111,7 @@ class ButtonMenu extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+            
               ),
               onPressed: disable||isLoading ? null : onPressed,
               child: isLoading ? _buildLoadingIndicator() : _buildButtonContent(),

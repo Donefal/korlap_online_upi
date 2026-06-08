@@ -100,6 +100,7 @@ Future<void> _pilihFile(String jenisFile) async {
                   ),
 
                   RuanganCard(
+                    showNext: false,
                     item: RuanganItem(
                       id: widget.ruangan.id,
                       gedung: widget.ruangan.gedung,

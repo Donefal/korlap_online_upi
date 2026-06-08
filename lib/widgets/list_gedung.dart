@@ -10,7 +10,6 @@ class RuanganItem {
   final String status;
   final String jenisRuangan;
   final VoidCallback? onPinjam;
-  final bool showNextIcon;
 
   const RuanganItem({
     required this.id,
@@ -20,7 +19,6 @@ class RuanganItem {
     required this.status,
     required this.jenisRuangan,
     this.onPinjam,
-    this.showNextIcon = true
   });
 }
 
@@ -45,8 +43,9 @@ Color _tentukanColorRuangan(String jenis) {
 
 class RuanganCard extends StatelessWidget {
   final RuanganItem item;
+  final bool showNext;
 
-  const RuanganCard({super.key, required this.item});
+  const RuanganCard({super.key, required this.item, this.showNext = true});
 
   @override
   Widget build(BuildContext context) {
@@ -92,16 +91,16 @@ class RuanganCard extends StatelessWidget {
               ),
             ),
 
-            // Pinjam button
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: item.onPinjam,
-                  icon: Icon(Icons.arrow_circle_right_rounded, color: Colors.black),
-                ),
-              ],
-            ),
+            if (showNext)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: item.onPinjam,
+                    icon: const Icon(Icons.arrow_circle_right_rounded, color: Colors.black),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
