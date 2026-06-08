@@ -10,6 +10,7 @@ class PeminjamanItem  {
   final String statusPinjaman;
   final TimeOfDay start;
   final TimeOfDay end;
+  final DateTime date;
   final VoidCallback? yesAction;
   final VoidCallback? noAction;
 
@@ -21,6 +22,7 @@ class PeminjamanItem  {
     required this.statusPinjaman,
     required this.start,
     required this.end,
+    required this.date,
     this.yesAction,
     this.noAction,
   });
@@ -91,6 +93,8 @@ class PeminjamanCard extends StatelessWidget {
 
                   // Status + jenis chips
                   _buildChip(context, item.statusPinjaman, _tentukanColorStatus(item.statusPinjaman)),
+                  const SizedBox(height: 8),
+                  _buildChip(context, item.date.toString().split(' ')[0],Colors.black),
                   const SizedBox(height: 8),
                   _buildChip(context, "${item.start.format(context)} - ${item.end.format(context)}", Colors.black),
 

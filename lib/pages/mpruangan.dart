@@ -27,7 +27,7 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
   List<String> _dataLantai = [];
 
   final List<PeminjamanItem> _listHistori = [
-    const PeminjamanItem(
+    PeminjamanItem(
       id: 201,
       gedung: "Gedung B",
       lantai: 1,
@@ -35,26 +35,29 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
       statusPinjaman: "Diterima",
       start: TimeOfDay(hour: 12, minute: 0),
       end: TimeOfDay(hour: 24, minute: 0),
+      date: DateTime(2026, 6, 9),
     ),
 
-    const PeminjamanItem(
+    PeminjamanItem(
       id: 202,
       gedung: "Gedung E",
       lantai: 1,
       namaRuangan: "20.4E.01.001",
       statusPinjaman: "Tidak Diterima",
       start: TimeOfDay(hour: 12, minute: 0),
-      end: TimeOfDay(hour: 24, minute: 0)
+      end: TimeOfDay(hour: 24, minute: 0),
+      date: DateTime(2026, 6, 9),
     ),
 
-    const PeminjamanItem(
+    PeminjamanItem(
       id: 202,
       gedung: "Gedung E",
       lantai: 1,
       namaRuangan: "20.4E.01.001",
       statusPinjaman: "Sedang diajukan",
       start: TimeOfDay(hour: 12, minute: 0),
-      end: TimeOfDay(hour: 24, minute: 0)
+      end: TimeOfDay(hour: 24, minute: 0),
+      date: DateTime(2026, 6, 9),
     ),
   ];
 
@@ -248,6 +251,8 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
                         statusPinjaman: ruangan.statusPinjaman,
                         start: ruangan.start,
                         end: ruangan.end,
+                        date: ruangan.date,
+                        
                         yesAction: () {
 
                         },

@@ -21,6 +21,7 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
 
   TimeOfDay? _waktuMulai;
   TimeOfDay? _waktuSelesai;
+  DateTime? _hari;
 
   String? _namaFileSK;
   String? _namaFilePM;
@@ -44,6 +45,21 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
         } else {
           _waktuSelesai = picked;
         }
+      });
+    }
+  }
+
+  Future<void> _pilihTanggal(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _hari = pickedDate;
       });
     }
   }
@@ -135,7 +151,7 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
                     onPinjam: null,
                   ),
                 ),
-                
+
                 const SizedBox(height: 30),
 
                 const Text(
@@ -171,6 +187,20 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
                   ),
                 ),
                 const SizedBox(height: 15),
+
+                OutlinedButton.icon(
+                  onPressed: () => _pilihTanggal(context),
+                  icon: const Icon(Icons.calendar_month_rounded),
+                  label: Text(
+                    _hari == null
+                        ? "Pilih Tanggal"
+                        // 👇 Formats the date manually so it looks like DD/MM/YYYY
+                        : "${_hari!.day.toString().padLeft(2, '0')}/${_hari!.month.toString().padLeft(2, '0')}/${_hari!.year}",
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+
                 Row(
                   children: [
                     Expanded(
@@ -196,7 +226,9 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
                         ),
                       ),
                     ),
+
                     const SizedBox(width: 12),
+
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () => _pilihWaktu(context, false),
