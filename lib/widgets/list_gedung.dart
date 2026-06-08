@@ -10,6 +10,7 @@ class RuanganItem {
   final String status;
   final String jenisRuangan;
   final VoidCallback? onPinjam;
+  final bool showNextIcon;
 
   const RuanganItem({
     required this.id,
@@ -19,6 +20,8 @@ class RuanganItem {
     required this.status,
     required this.jenisRuangan,
     this.onPinjam,
+    this.showNextIcon = true
+    t
   });
 }
 

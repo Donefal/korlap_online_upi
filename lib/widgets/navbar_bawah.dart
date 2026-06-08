@@ -12,15 +12,15 @@ class AppBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-
+    const mainColor = Color.fromARGB(255, 0, 128, 255);
+    
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
           border: Border.all(
-          color: Color.fromARGB(255, 0, 128, 255),
+          color: mainColor,
           width: 1.5,
           ),
         ),
@@ -29,20 +29,20 @@ class AppBottomNav extends StatelessWidget {
           child: NavigationBar(
             selectedIndex: currentIndex,
             onDestinationSelected: onDestinationSelected,
-            backgroundColor: scheme.surfaceContainer,
+            backgroundColor: Colors.white,
             shadowColor: Colors.black,
             elevation: 10,
             destinations: const [
 
               NavigationDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
+                icon: Icon(Icons.home_outlined, color: mainColor,),
+                selectedIcon: Icon(Icons.home, color: mainColor),
                 label: 'Home',
               ),
 
               NavigationDestination(
-                icon: Icon(Icons.admin_panel_settings_outlined),
-                selectedIcon: Icon(Icons.admin_panel_settings),
+                icon: Icon(Icons.admin_panel_settings_outlined, color: mainColor,),
+                selectedIcon: Icon(Icons.admin_panel_settings, color: mainColor,),
                 label: 'Admin Action',
               ),
             ],
