@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/models/banner_item.dart';
+import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_1.dart';
+import 'package:korlap_online_upi/pages/status/status_peminjaman.dart';
 import 'package:korlap_online_upi/widgets/button_aksi.dart';
 import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
@@ -56,40 +58,55 @@ class _UserHomeViewState extends State<UserHomeView> {
               ],
             ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 40), // Dirapatkan sedikit agar responsif di berbagai layar hp
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ButtonMenu(
-                  text: "Pinjam Ruangan",
-                  icon: Icons.meeting_room,
-                  margin: EdgeInsets.zero,
-                  desc: "Pinjam Ruangan",
-                  onPressed: () {
-                    print("Menuju Halaman Peminjaman Ruangan");
-                    //TODO: Navigasi ke page Peminjaman Ruangan
-                  },
+                // 1. Tombol Pinjam Ruangan (Menuju ke C2.1)
+                Expanded(
+                  child: ButtonMenu(
+                    text: "Pinjam Ruangan",
+                    icon: Icons.meeting_room,
+                    margin: EdgeInsets.zero,
+                    desc: "Pinjam Ruangan",
+                    onPressed: () {
+                      print("Membuka halaman Peminjaman Ruangan (C2.1)");
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => const PeminjamanRuanganPage())
+                      );
+                    },
+                  ),
                 ),
-                ButtonMenu(
-                  text: "Status Peminjaman",  
-                  icon: Icons.assignment_turned_in,
-                  margin: EdgeInsets.zero,
-                  desc: "Status Peminjaman",
-                  onPressed: () {
-                    print("Menuju ke halaman Status Peminjaman");
-                    //TODO: Navigasi ke halaman status peminjaman
-                  },
+
+                // 2. Tombol Status Peminjaman
+                Expanded(
+                  child: ButtonMenu(
+                    text: "Status Peminjaman",  
+                    icon: Icons.assignment_turned_in,
+                    margin: EdgeInsets.zero,
+                    desc: "Status Peminjaman",
+                    onPressed: () {
+                      Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const StatusPeminjamanPage())
+                      );
+                    },
+                  ),
                 ),
-                ButtonMenu(
-                  text: "Histori Peminjaman",  
-                  icon: Icons.history,
-                  margin: EdgeInsets.zero,
-                  desc: "Histori Peminjaman",
-                  onPressed: () {
-                    print("Menuju halaman Histori");
-                    //TODO: Navigasi ke halaman histori
-                  },
+
+                // 3. Tombol Histori Peminjaman
+                Expanded(
+                  child: ButtonMenu(
+                    text: "Histori Peminjaman",  
+                    icon: Icons.history,
+                    margin: EdgeInsets.zero,
+                    desc: "Histori Peminjaman",
+                    onPressed: () {
+                      print("Menuju halaman Histori");
+                    },
+                  ),
                 ),
               ],
             ),
@@ -106,10 +123,8 @@ class _UserHomeViewState extends State<UserHomeView> {
 
           if (index == 0) {
             print("User klik Home"); 
-            // tetep di Home
           } else if (index == 1) {
             print("User klik Menu Notif"); 
-            //TODO: ganti ke halaman notif
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Ntar diatur")),
             );
