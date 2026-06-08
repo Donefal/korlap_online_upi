@@ -11,6 +11,7 @@ import 'package:korlap_online_upi/test.dart';
 import 'package:korlap_online_upi/widgets/auth_gate.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
 import 'package:provider/provider.dart';
+import 'session_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,21 +20,20 @@ void main() async {
   await session.restore();
 
   runApp(
-    ChangeNotifierProvider.value(
-      value: session,
-      child: const MyApp()
-    )
+    ChangeNotifierProvider(
+      create: (context) => SessionProvider(),
+      child: const MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Korlap Digital (Kodig)',
+      title: 'Korlap Online UPI',
       debugShowCheckedModeBanner: false,
       
       // 1. Seting warna fallback dasar aplikasi
@@ -71,4 +71,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
