@@ -21,7 +21,6 @@ class RuanganItem {
     required this.jenisRuangan,
     this.onPinjam,
     this.showNextIcon = true
-    t
   });
 }
 
