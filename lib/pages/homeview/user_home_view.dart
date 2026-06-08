@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/models/banner_item.dart';
+import 'package:korlap_online_upi/pages/histori/histori_peminjaman.dart';
+import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_1.dart';
+import 'package:korlap_online_upi/pages/status/status_peminjaman.dart';
 import 'package:korlap_online_upi/widgets/button_menu.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/banner_carousel.dart';
@@ -67,8 +70,10 @@ class _UserHomeViewState extends State<UserHomeView> {
                   icon: Icons.meeting_room,
                   margin: EdgeInsets.zero,
                   onPressed: () {
-                    print("Menuju Halaman Peminjaman Ruangan");
-                    //TODO: Navigasi ke page Peminjaman Ruangan
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => const PeminjamanRuanganPage())
+                      );
                   },
                 ),
                 ),
@@ -80,8 +85,10 @@ class _UserHomeViewState extends State<UserHomeView> {
                   icon: Icons.assignment_turned_in,
                   margin: EdgeInsets.zero,
                   onPressed: () {
-                    print("Menuju ke halaman Status Peminjaman");
-                    //TODO: Navigasi ke halaman status peminjaman
+                      Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const StatusPeminjamanPage())
+                      );
                   },
                 ),
                 ),
@@ -93,8 +100,10 @@ class _UserHomeViewState extends State<UserHomeView> {
                   icon: Icons.history,
                   margin: EdgeInsets.zero,
                   onPressed: () {
-                    print("Menuju halaman Histori");
-                    //TODO: Navigasi ke halaman histori
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const HistoriPeminjamanPage())
+                      );
                   },
                 ),
                 )

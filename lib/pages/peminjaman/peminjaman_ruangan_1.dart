@@ -4,6 +4,8 @@ import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/button_aksi.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
 import 'package:korlap_online_upi/widgets/list_gedung.dart'; 
+import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
+
 
 class PeminjamanRuanganPage extends StatefulWidget {
   const PeminjamanRuanganPage({super.key});
@@ -13,46 +15,43 @@ class PeminjamanRuanganPage extends StatefulWidget {
 }
 
 class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
-  int _currentFooterIndex = 0;
-
   final TextEditingController _gedungCtrl = TextEditingController();
   final TextEditingController _lantaiCtrl = TextEditingController();
 
   final List<String> _dataGedung = ["Gedung B", "Gedung E"];
   List<String> _dataLantai = [];
 
-
   final List<RuanganItem> _masterRuanganList = [
     RuanganItem(id: 1, gedung: "Gedung B", lantai: 1, namaRuangan: "Ruang Prodi TeknIK Komputer", status: "Tersedia", jenisRuangan: "Ruangan Prodi"),
     RuanganItem(id: 2, gedung: "Gedung B", lantai: 2, namaRuangan: "Laboratorium Bahasa", status: "Tersedia", jenisRuangan: "Laboratorium"),
-    RuanganItem(id: 3, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.007", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
+    RuanganItem(id: 3, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.007", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
     RuanganItem(id: 4, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.009", status: "Tersedia", jenisRuangan: "Ruangan Microteaching"),
     RuanganItem(id: 5, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.010", status: "Tersedia", jenisRuangan: "Ruangan Microteaching Observer"),
     RuanganItem(id: 6, gedung: "Gedung B", lantai: 3, namaRuangan: "Embedded & Network Laboratory", status: "Tersedia", jenisRuangan: "Laboratorium"),
-    RuanganItem(id: 7, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.001", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
+    RuanganItem(id: 7, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.001", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
     RuanganItem(id: 8, gedung: "Gedung B", lantai: 3, namaRuangan: "Audio Visual Laboratory", status: "Tersedia", jenisRuangan: "Laboratorium"),
     RuanganItem(id: 9, gedung: "Gedung B", lantai: 3, namaRuangan: "Laboratorium Komputer Pendidikan", status: "Tersedia", jenisRuangan: "Laboratorium"),
-    RuanganItem(id: 10, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.002", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 11, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.001", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 12, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.002", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 13, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.009", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 14, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.005", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 15, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.006", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 16, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.005", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 17, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.007", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 18, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.008", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 19, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.009", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 20, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.000", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 21, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.002", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 22, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.001", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
+    RuanganItem(id: 10, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.002", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 11, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.001", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 12, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.002", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 13, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.009", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 14, gedung: "Gedung B", lantai: 4, namaRuangan: "20.4B.04.005", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 15, gedung: "Gedung B", lantai: 3, namaRuangan: "20.4B.03.006", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 16, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.005", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 17, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.007", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 18, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.008", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 19, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.009", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 20, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.000", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 21, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.002", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 22, gedung: "Gedung B", lantai: 5, namaRuangan: "20.4B.05.001", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
 
-    RuanganItem(id: 23, gedung: "Gedung E", lantai: 1, namaRuangan: "20.4E.01.004", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 24, gedung: "Gedung E", lantai: 2, namaRuangan: "20.4E.02.006", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 25, gedung: "Gedung E", lantai: 1, namaRuangan: "20.4E.01.001", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 26, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.003", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 27, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.002", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 28, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.001", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
-    RuanganItem(id: 29, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.000", status: "Tersedia", jenisRuangan: "Ruangan Kelas"),
+    RuanganItem(id: 23, gedung: "Gedung E", lantai: 1, namaRuangan: "20.4E.01.004", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 24, gedung: "Gedung E", lantai: 2, namaRuangan: "20.4E.02.006", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 25, gedung: "Gedung E", lantai: 1, namaRuangan: "20.4E.01.001", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 26, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.003", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 27, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.002", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 28, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.001", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
+    RuanganItem(id: 29, gedung: "Gedung E", lantai: 3, namaRuangan: "20.4E.03.000", status: "Tersedia", jenisRuangan: "Ruang Kelas"),
   ];
 
   List<RuanganItem> _filterRuanganList = [];
@@ -60,7 +59,6 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
   @override
   void initState() {
     super.initState();
-
     _gedungCtrl.addListener(_onGedungChanged);
   }
 
@@ -72,11 +70,9 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
     super.dispose();
   }
 
-
   void _onGedungChanged() {
     setState(() {
       _lantaiCtrl.clear(); 
-      
       if (_gedungCtrl.text == "Gedung B") {
         _dataLantai = ["1", "2", "3", "4", "5"];
       } else if (_gedungCtrl.text == "Gedung E") {
@@ -87,7 +83,6 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
     });
   }
 
-
   void _eksekusiFilter() {
     if (_gedungCtrl.text.isEmpty || _lantaiCtrl.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,11 +91,9 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       return;
     }
 
-
     final int angkaLantaiTujuan = int.parse(_lantaiCtrl.text);
 
     setState(() {
-
       _filterRuanganList = _masterRuanganList.where((ruangan) {
         return ruangan.gedung == _gedungCtrl.text && ruangan.lantai == angkaLantaiTujuan;
       }).toList();
@@ -110,13 +103,10 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: const AppNavbar(),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
             child: Column(
@@ -141,9 +131,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                         iconChoice: DdIcon.gedung,
                       ),
                     ),
-
                     const SizedBox(width: 12),
-
                     Expanded(
                       child: AppDropDown(
                         key: UniqueKey(),
@@ -157,10 +145,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                     ),
                   ],
                 ),
-
-
                 const SizedBox(height: 12),
-
 
                 ButtonAction(
                   text: "Filter",
@@ -198,7 +183,6 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                     itemBuilder: (context, index) {
                       final ruangan = _filterRuanganList[index];
 
-
                       return RuanganCard(
                         item: RuanganItem(
                           id: ruangan.id,
@@ -207,9 +191,15 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                           namaRuangan: ruangan.namaRuangan,
                           status: ruangan.status,
                           jenisRuangan: ruangan.jenisRuangan,
+
                           onPinjam: () {
-                            print("Tombol aksi panah ditekan di ruangan: ${ruangan.namaRuangan}");
-                            // TODO: Tambahkan Navigator.push ke halaman formulir detail pinjam di sini
+                            print("Membuka panduan peminjaman ruangan: ${ruangan.namaRuangan}");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPeminjamanPage(ruangan: ruangan),
+                              ),
+                            );
                           },
                         ),
                       );
@@ -218,16 +208,18 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
           ),
         ],
       ),
-
+      
 
       bottomNavigationBar: AppBottomNav(
-        currentIndex: _currentFooterIndex,
+        currentIndex: 0, 
         onDestinationSelected: (int index) {
-          setState(() {
-            _currentFooterIndex = index;
-          });
           if (index == 0) {
-            Navigator.pop(context); 
+            // Bersihkan semua tumpukan halaman dan paksa kembali ke UserHomeView terdepan
+            Navigator.popUntil(context, (route) => route.isFirst);
+          } else if (index == 1) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Ntar diatur")),
+            );
           }
         },
       ),

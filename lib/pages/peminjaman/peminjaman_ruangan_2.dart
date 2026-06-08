@@ -4,6 +4,7 @@ import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';  
 import 'package:korlap_online_upi/widgets/button_aksi.dart';   
 import 'package:korlap_online_upi/widgets/list_gedung.dart';   
+import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_3.dart';
 
 class DetailPeminjamanPage extends StatelessWidget {
   final RuanganItem ruangan;
@@ -13,20 +14,17 @@ class DetailPeminjamanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: const AppNavbar(),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-
                   const Text(
                     "Peminjaman Ruangan",
                     textAlign: TextAlign.center,
@@ -49,43 +47,18 @@ class DetailPeminjamanPage extends StatelessWidget {
                     ),
                   ),
 
-
-                  Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: const BorderSide(color: Colors.black12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(Icons.meeting_room, color: Colors.blueAccent),
-                              const SizedBox(width: 8),
-                              Text(
-                                ruangan.namaRuangan,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Divider(height: 20),
-                          Text("Lokasi       : ${ruangan.gedung} -- LT. ${ruangan.lantai}", style: const TextStyle(fontSize: 14)),
-                          const SizedBox(height: 6),
-                          Text("Kategori   : ${ruangan.jenisRuangan}", style: const TextStyle(fontSize: 14)),
-                          const SizedBox(height: 6),
-                          Text("Status       : ${ruangan.status}", style: const TextStyle(fontSize: 14)),
-                        ],
-                      ),
+                  RuanganCard(
+                    item: RuanganItem(
+                      id: ruangan.id,
+                      gedung: ruangan.gedung,
+                      lantai: ruangan.lantai,
+                      namaRuangan: ruangan.namaRuangan,
+                      status: ruangan.status,
+                      jenisRuangan: ruangan.jenisRuangan,
+                      onPinjam: null, 
                     ),
                   ),
                   const SizedBox(height: 20),
-
 
                   const Text(
                     "Syarat & Ketentuan Peminjaman:",
@@ -126,7 +99,6 @@ class DetailPeminjamanPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-
                   ButtonAction(
                     text: "Lanjutkan",
                     icon: Icons.arrow_forward,
@@ -135,8 +107,13 @@ class DetailPeminjamanPage extends StatelessWidget {
                     posisi: Alignment.centerRight, 
                     margin: const EdgeInsets.only(bottom: 20),
                     onPressed: () {
-                      print("Navigasi ke Halaman Form Pengisian Pengajuan Selanjutya...");
-                      // TODO: Navigator.push(context, MaterialPageRoute(builder: (context) => FormPengajuanPage()));
+                      print("Navigasi ke Halaman Konfirmasi Pengajuan...");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FormPengajuanPage(ruangan: ruangan),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -146,12 +123,10 @@ class DetailPeminjamanPage extends StatelessWidget {
         ],
       ),
 
-
       bottomNavigationBar: AppBottomNav(
         currentIndex: 0, 
         onDestinationSelected: (int index) {
           if (index == 0) {
-
             Navigator.popUntil(context, (route) => route.isFirst);
           }
         },
