@@ -35,7 +35,8 @@ Color _tentukanColorStatus(String status) {
 Color _tentukanColorRuangan(String jenis) {
   return switch (jenis.toLowerCase()) {
     'laboratorium'            => Colors.blueGrey,
-    'ruang kelas'             => Colors.orangeAccent,
+    'ruang kelas'             => Colors.orange,
+    'ruang microteaching'     => Colors.blue,
     _                         => Colors.black12
   };
 }
@@ -51,6 +52,7 @@ class RuanganCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -60,8 +62,8 @@ class RuanganCard extends StatelessWidget {
             // Avatar / image placeholder
             CircleAvatar(
               radius: 32,
-              backgroundColor: Colors.black12,
-              child: Icon(Icons.meeting_room_outlined, color: Colors.black),
+              backgroundColor: const Color.fromARGB(255, 0, 128, 255),
+              child: Icon(Icons.meeting_room_outlined, color: Colors.white),
             ),
             const SizedBox(width: 16),
 
@@ -111,7 +113,7 @@ class RuanganCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
+        color: color.withValues(alpha: 0.05),
         border: Border.all(color: color.withValues(alpha: 0.5)),
         borderRadius: BorderRadius.circular(20),
       ),

@@ -18,14 +18,13 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
     const Text appTitle = Text("Korlap Online", style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white));
 
     return Container(
-      margin: EdgeInsets.only(top: 20, left: 20),
+      margin: EdgeInsets.only(top: 20, left: 20, right: 20),
       child: AppBar(
         elevation: 0,
         title: ModalRoute.of(context)?.canPop == true ? null : appTitle,
         backgroundColor: Colors.transparent,
         actions: <Widget>[
           Container(
-            margin: const EdgeInsets.only(right: 12),
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,

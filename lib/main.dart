@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color.fromARGB(255, 73, 179, 255),  
+                Color.fromARGB(255, 0, 128, 255),  
                 const Color.fromARGB(255, 245, 248, 250),  
               ],
             ),

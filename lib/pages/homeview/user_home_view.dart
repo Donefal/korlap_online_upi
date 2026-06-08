@@ -35,15 +35,7 @@ class _UserHomeViewState extends State<UserHomeView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                const Text(
-                  "Main Menu",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black,
-                  ),
-                ),
+                Center(child: AppText(text: "Main Menu", mode: TextMode.gede)),
           
                 const SizedBox(height: 30),
           

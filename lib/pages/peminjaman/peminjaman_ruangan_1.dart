@@ -30,7 +30,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       id: 1,
       gedung: "Gedung B",
       lantai: 1,
-      namaRuangan: "Ruang Prodi TeknIK Komputer",
+      namaRuangan: "Ruang Prodi Teknik Komputer",
       status: "Tersedia",
       jenisRuangan: "Ruangan Prodi",
     ),
@@ -56,7 +56,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       lantai: 3,
       namaRuangan: "20.4B.03.009",
       status: "Tersedia",
-      jenisRuangan: "Ruangan Microteaching",
+      jenisRuangan: "Ruang Microteaching",
     ),
     RuanganItem(
       id: 5,
@@ -64,7 +64,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       lantai: 3,
       namaRuangan: "20.4B.03.010",
       status: "Tersedia",
-      jenisRuangan: "Ruangan Microteaching Observer",
+      jenisRuangan: "Ruang Microteaching",
     ),
     RuanganItem(
       id: 6,

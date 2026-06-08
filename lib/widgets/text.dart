@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum TextMode {
+  gede,
   paragraph,
   header,
   subheader,
@@ -41,7 +42,8 @@ class _DropDownState extends State<AppText> {
       TextMode.paragraph => 13,
       TextMode.subheader => 16,
       TextMode.header => 26,
-      TextMode.subheaderbesar => 20
+      TextMode.subheaderbesar => 20,
+      TextMode.gede => 35
     };
   }
 
@@ -50,7 +52,8 @@ class _DropDownState extends State<AppText> {
       TextMode.paragraph => FontWeight.w400,
       TextMode.subheader => FontWeight.w500,
       TextMode.subheaderbesar => FontWeight.w500,
-      TextMode.header => FontWeight.w700
+      TextMode.header => FontWeight.w700,
+      TextMode.gede => FontWeight.w900
     };
   }
 
