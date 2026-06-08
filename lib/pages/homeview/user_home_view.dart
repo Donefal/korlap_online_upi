@@ -43,16 +43,22 @@ class _UserHomeViewState extends State<UserHomeView> {
                   height: 250,
                   banners: [
                     BannerItem(
-                      text: "Selamat datang",
-                      backgroundColor: const Color.fromARGB(255, 255, 148, 0),
+                      header: "WELCOME TO",
+                      subText:"Indonesian Education University\nCibiru Campus",
+                      imageUrl: "https://i.ytimg.com/vi/VF3T3b-C1jw/maxresdefault.jpg"
                     ),
                     BannerItem(
-                      text: "Ntar diatur",
-                      backgroundColor: const Color.fromARGB(255, 255, 0, 255),
+                      header: "REKOMENDASI RUANG ACARA BESAR",
+                      subText: "Merencanakan seminar atau kegiatan Organisasi.\nCek jadwal ketersediaan Auditorium bulan ini.",
+                      // imageUrl: "https://perslima.com/wp-content/uploads/2023/05/UPI-Kampus-Cibiru-Menyelesaikan-Pembangunan-Gedung-Baru-Setinggi-Tiga-Lantai.webp"
+                      // backgroundColor: Color.fromARGB(255, 28, 199, 241)
+                      imageUrl: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
                     ),
                     BannerItem(
-                      text: "Man idk",
-                      backgroundColor: const Color.fromARGB(255, 0, 148, 255),
+                      header: "PEMELIHARAAN FASILITAS BERKALA",
+                      subText: "Gedung Serba Guna (GSG) saat ini sedang dalam proses perawatan sistem audio dan pencahayaan hingga tanggal yang belum ditentukan. Mohon maaf atas ketidaknyamanan ini.",
+                      // backgroundColor: const Color.fromARGB(255, 0, 200, 255),
+                      imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop"
                     ),
                   ],
                 ),

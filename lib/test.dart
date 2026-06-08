@@ -84,19 +84,19 @@ class _TestPageState extends State<TestPage> {
                 height: 220, // Tinggi fiks untuk semua banner
                 banners: [
                   BannerItem(
-                    text: "Promo Diskon 50% Hari Ini!",
+                    header: "Promo Diskon 50% Hari Ini!",
                     backgroundColor: Colors.blueAccent, 
                   ),
                   BannerItem(
-                    text: "Koleksi Terbaru Musim Panas",
+                    header: "Koleksi Terbaru Musim Panas",
                     imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8", 
                   ),
                   BannerItem(
-                    text: "Gratis Ongkir ke Seluruh Indonesia",
+                    header: "Gratis Ongkir ke Seluruh Indonesia",
                     backgroundColor: Colors.orange,
                   ),
                   BannerItem(
-                    text: "Ini tambahan dari urang", 
+                    header: "Ini tambahan dari urang", 
                     backgroundColor: Colors.blueAccent
                   )
                 ],

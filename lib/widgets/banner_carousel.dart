@@ -11,12 +11,13 @@ import '../models/banner_item.dart';
 4. setiap banner tuliskan dalam banner item
 contoh : 
   BannerCarousel (
-  height:
+    height: 220,
     banners: [
       BannerItem(
-        teks:
-        backgroundColor:
-        imageUrl:
+        header: "Promo Diskon 50%!",
+        subText: "Khusus hari ini, jangan sampai kehabisan",
+        backgroundColor: Colors.blueAccent,
+        imageUrl: "https://...img",
       )
     ]
   )
@@ -30,7 +31,7 @@ class BannerCarousel extends StatefulWidget {
   const BannerCarousel({
     super.key,
     required this.banners,
-    this.height = 200.0, // Ukuran fiks untuk semua banner
+    this.height = 200.0, 
     this.autoPlayDuration = const Duration(seconds: 7),
   });
 
@@ -46,7 +47,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
   @override
   void initState() {
     super.initState();
-    // Memulai dari angka besar (kelipatan jumlah banner) agar bisa langsung digeser ke kiri (infinite effect)
     int initialPage = widget.banners.isNotEmpty ? widget.banners.length * 1000 : 0;
     _pageController = PageController(initialPage: initialPage);
     _currentPage = initialPage;
@@ -54,7 +54,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
     _startAutoPlay();
   }
 
-  // Fungsi agar banner geser otomatis
   void _startAutoPlay() {
     if (widget.banners.isEmpty) return;
     _timer = Timer.periodic(widget.autoPlayDuration, (timer) {
@@ -83,7 +82,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          // Banner Slides
           PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
@@ -91,9 +89,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                 _currentPage = index;
               });
             },
-            // Tidak diberikan itemCount agar bisa loop tak terbatas
             itemBuilder: (context, index) {
-              // Menggunakan modulo (%) agar index kembali ke 0 setelah mencapai batas array
               final itemIndex = index % widget.banners.length;
               final banner = widget.banners[itemIndex];
 
@@ -101,7 +97,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
             },
           ),
           
-          // Titik Indikator (Dots) di bawah banner
           Positioned(
             bottom: 10,
             child: Row(
@@ -127,7 +122,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
             ? DecorationImage(
                 image: NetworkImage(banner.imageUrl!),
                 fit: BoxFit.cover,
-                // Efek gelap sedikit agar teks putih tetap terbaca jika pakai gambar
                 colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.4),
                   BlendMode.darken,
@@ -138,14 +132,35 @@ class _BannerCarouselState extends State<BannerCarousel> {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            banner.text,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Column( // <-- MENGGUNAKAN COLUMN UNTUK MENYUSUN HEADER & SUB-TEKS
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // WIDGET UNTUK HEADER BANNER
+              Text(
+                banner.header,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              
+              // Tampilkan subText jika data subText diisi (tidak null)
+              if (banner.subText != null && banner.subText!.isNotEmpty) ...[
+                const SizedBox(height: 6), // Jarak kecil antara header dan sub-teks
+                Text(
+                  banner.subText!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.85), // Warna teks sedikit lebih soft
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ],
           ),
         ),
       ),
@@ -153,13 +168,12 @@ class _BannerCarouselState extends State<BannerCarousel> {
   }
 
   Widget _buildDotIndicator(int index) {
-    // Mencocokan index titik dengan index banner saat ini
     final isActive = (_currentPage % widget.banners.length) == index;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
       height: 8.0,
-      width: isActive ? 24.0 : 8.0, // Jika aktif bentuknya memanjang
+      width: isActive ? 24.0 : 8.0,
       decoration: BoxDecoration(
         color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(4.0),
