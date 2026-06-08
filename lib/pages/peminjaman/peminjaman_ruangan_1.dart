@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/pages/adminaction.dart';
 import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
 import 'package:korlap_online_upi/widgets/dropdown.dart';
+import 'package:korlap_online_upi/widgets/index.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/button_aksi.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
@@ -32,7 +33,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       lantai: 1,
       namaRuangan: "Ruang Prodi Teknik Komputer",
       status: "Tersedia",
-      jenisRuangan: "Ruangan Prodi",
+      jenisRuangan: "Ruang Prodi",
     ),
     RuanganItem(
       id: 2,
@@ -312,10 +313,19 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
 
   @override
   Widget build(BuildContext context) {
+    final displayList = _filterRuanganList.isEmpty
+        ? _masterRuanganList
+        : _filterRuanganList;
+
     return Scaffold(
       appBar: const AppNavbar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 10),
+        padding: const EdgeInsets.only(
+          right: 20,
+          left: 20,
+          top: 30,
+          bottom: 10,
+        ),
         child: Card(
           elevation: 10,
           shape: RoundedRectangleBorder(
@@ -342,14 +352,8 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        "Peminjaman Ruangan",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      AppText(text: "Peminjaman Ruangan", mode: TextMode.gede),
+
                       const SizedBox(height: 20),
 
                       Row(
@@ -378,6 +382,7 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                           ),
                         ],
                       ),
+
                       const SizedBox(height: 12),
 
                       ButtonAction(
@@ -390,65 +395,44 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                         onPressed: _eksekusiFilter,
                       ),
 
-                      const Text(
-                        "List Peminjaman Ruangan:",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      AppText(
+                        text: "List Peminjaman Ruangan:",
+                        mode: TextMode.header,
                       ),
+
                       const SizedBox(height: 6),
                     ],
                   ),
                 ),
 
-                _filterRuanganList.isEmpty
-                    ? const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(24.0),
-                          child: Text(
-                            "Tidak ada data.\nSilakan tentukan Gedung & Lantai lalu klik Filter.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                      )
-                    : ListView.builder(
-                        // IMPORTANT FIXES FOR SINGLECHILDSCROLLVIEW:
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: _filterRuanganList.length,
-                        itemBuilder: (context, index) {
-                          final ruangan = _filterRuanganList[index];
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: displayList.length,
+                  itemBuilder: (context, index) {
+                    final ruangan = displayList[index];
 
-                          return RuanganCard(
-                            item: RuanganItem(
-                              id: ruangan.id,
-                              gedung: ruangan.gedung,
-                              lantai: ruangan.lantai,
-                              namaRuangan: ruangan.namaRuangan,
-                              status: ruangan.status,
-                              jenisRuangan: ruangan.jenisRuangan,
-
-                              onPinjam: () {
-                                print(
-                                  "Membuka panduan peminjaman ruangan: ${ruangan.namaRuangan}",
-                                );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailPeminjamanPage(ruangan: ruangan),
-                                  ),
-                                );
-                              },
+                    return RuanganCard(
+                      item: RuanganItem(
+                        id: ruangan.id,
+                        gedung: ruangan.gedung,
+                        lantai: ruangan.lantai,
+                        namaRuangan: ruangan.namaRuangan,
+                        status: ruangan.status,
+                        jenisRuangan: ruangan.jenisRuangan,
+                        onPinjam: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPeminjamanPage(ruangan: ruangan),
                             ),
                           );
                         },
                       ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

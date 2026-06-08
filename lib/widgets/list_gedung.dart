@@ -27,7 +27,6 @@ Color _tentukanColorStatus(String status) {
   return switch (status.toLowerCase()) {
     'tersedia'                => Colors.green,
     'sudah dipinjam'          => Colors.red,
-    'sudah ada yg mengajukan' => Colors.orange,
     _                         => Colors.black12,
   };
 }
@@ -37,6 +36,7 @@ Color _tentukanColorRuangan(String jenis) {
     'laboratorium'            => Colors.blueGrey,
     'ruang kelas'             => Colors.orange,
     'ruang microteaching'     => Colors.blue,
+    'ruang prodi'             => Colors.deepPurpleAccent,
     _                         => Colors.black12
   };
 }
