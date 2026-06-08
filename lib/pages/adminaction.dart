@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/pages/broadcast.dart';
+import 'package:korlap_online_upi/pages/makun.dart';
+import 'package:korlap_online_upi/pages/mpruangan.dart';
 import '../widgets/index.dart';
 import 'mruangan.dart';
 
@@ -48,7 +51,12 @@ class _AdminActionPageState extends State<AdminActionPage> {
                       icon: Icons.gavel_rounded,
                       margin: EdgeInsets.zero,
                       onPressed: () {
-                        // TODO: Navigasi ke halaman manajemen pengajuan peminjaman
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MPruanganPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -60,7 +68,12 @@ class _AdminActionPageState extends State<AdminActionPage> {
                       icon: Icons.campaign_rounded,
                       margin: EdgeInsets.zero,
                       onPressed: () {
-                        // TODO: Navigasi ke halaman tambah broadcast pengumuman
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BroadcastPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -96,7 +109,12 @@ class _AdminActionPageState extends State<AdminActionPage> {
                       icon: Icons.manage_accounts_rounded,
                       margin: EdgeInsets.zero,
                       onPressed: () {
-                        // TODO: Navigasi ke halaman pengelolaan akun
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MAkunPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
