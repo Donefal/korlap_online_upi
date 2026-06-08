@@ -10,7 +10,8 @@ class PeminjamanItem  {
   final String statusPinjaman;
   final TimeOfDay start;
   final TimeOfDay end;
-  final VoidCallback? onAction;
+  final VoidCallback? yesAction;
+  final VoidCallback? noAction;
 
   const PeminjamanItem ({
     required this.id,
@@ -20,9 +21,12 @@ class PeminjamanItem  {
     required this.statusPinjaman,
     required this.start,
     required this.end,
-    this.onAction,
+    this.yesAction,
+    this.noAction,
   });
 }
+
+
 
 // Status chip color helper
 Color _tentukanColorStatus(String status) {
@@ -98,8 +102,13 @@ class PeminjamanCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: item.onAction,
-                    icon: const Icon(Icons.more_vert, color: Colors.black),
+                    onPressed: item.yesAction,
+                    icon: const Icon(Icons.check_circle, color: Colors.green),
+                  ),
+
+                  IconButton(
+                    onPressed: item.noAction,
+                    icon: const Icon(Icons.remove_circle, color: Colors.red),
                   ),
                 ],
               ),

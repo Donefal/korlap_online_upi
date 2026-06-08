@@ -1,242 +1,268 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart'; 
+import 'package:korlap_online_upi/pages/adminaction.dart';
+import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
+import 'package:korlap_online_upi/widgets/dropdown.dart';
+import 'package:korlap_online_upi/widgets/index.dart';
+import 'package:korlap_online_upi/widgets/navbar.dart';
+import 'package:korlap_online_upi/widgets/button_aksi.dart';
+import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
+import 'package:korlap_online_upi/widgets/list_gedung.dart';
+import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
+import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 
-class MPruanganPage extends StatefulWidget {
-  const MPruanganPage({super.key});
+class ManageRuanganPage extends StatefulWidget {
+  const ManageRuanganPage({super.key});
 
   @override
-  State<MPruanganPage> createState() => _MPruanganPageState();
+  State<ManageRuanganPage> createState() => _ManageRuanganPageState();
 }
 
-class _MPruanganPageState extends State<MPruanganPage> {
-  final int _currentIndex = 0; 
+class _ManageRuanganPageState extends State<ManageRuanganPage> {
+  final TextEditingController _gedungCtrl = TextEditingController();
+  final TextEditingController _lantaiCtrl = TextEditingController();
+  final TextEditingController _statusCtrl = TextEditingController();
 
-  final TextEditingController gedungFilterCtrl = TextEditingController();
-  final TextEditingController lantaiFilterCtrl = TextEditingController();
+  final List<String> _dataGedung = ["Gedung B", "Gedung E"];
+  final List<String> _dataStatus = ["Diterima", "Tidak Diterima", "Sedang Diajukan"];
+  List<String> _dataLantai = [];
 
-  final List<String> listGedung = ['Gedung A', 'Gedung B', 'Gedung C', 'FPMIPA J'];
-  final List<String> listLantai = ['Lantai 1', 'Lantai 2', 'Lantai 3'];
+  final List<PeminjamanItem> _listHistori = [
+    const PeminjamanItem(
+      id: 201,
+      gedung: "Gedung B",
+      lantai: 1,
+      namaRuangan: "Ruang Prodi Teknik Komputer",
+      statusPinjaman: "Diterima",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0),
+    ),
 
-  final List<Map<String, dynamic>> _peminjamanData = [];
+    const PeminjamanItem(
+      id: 202,
+      gedung: "Gedung E",
+      lantai: 1,
+      namaRuangan: "20.4E.01.001",
+      statusPinjaman: "Tidak Diterima",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0)
+    ),
+
+    const PeminjamanItem(
+      id: 202,
+      gedung: "Gedung E",
+      lantai: 1,
+      namaRuangan: "20.4E.01.001",
+      statusPinjaman: "Sedang diajukan",
+      start: TimeOfDay(hour: 12, minute: 0),
+      end: TimeOfDay(hour: 24, minute: 0)
+    ),
+  ];
+
+  List<PeminjamanItem> _filterRuanganList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _gedungCtrl.addListener(_onGedungChanged);
+  }
 
   @override
   void dispose() {
-    gedungFilterCtrl.dispose();
-    lantaiFilterCtrl.dispose();
+    _gedungCtrl.removeListener(_onGedungChanged);
+    _gedungCtrl.dispose();
+    _lantaiCtrl.dispose();
     super.dispose();
+  }
+
+  void _onGedungChanged() {
+    setState(() {
+      _lantaiCtrl.clear();
+      if (_gedungCtrl.text == "Gedung B") {
+        _dataLantai = ["1", "2", "3", "4", "5"];
+      } else if (_gedungCtrl.text == "Gedung E") {
+        _dataLantai = ["1", "2", "3"];
+      } else {
+        _dataLantai = [];
+      }
+    });
+  }
+
+  void _eksekusiFilter() {
+    if ((_gedungCtrl.text.isEmpty || _lantaiCtrl.text.isEmpty) && (_statusCtrl.text.isEmpty)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Silakan pilih data terlebih dahulu!"),
+        ),
+      );
+      return;
+    }
+
+    if(_statusCtrl.text.isNotEmpty) {
+      setState(() {
+        _filterRuanganList = _listHistori.where((ruangan) {
+          return ruangan.statusPinjaman == _statusCtrl.text;
+        }).toList();
+      });
+
+
+      return;
+    }
+
+    final int angkaLantaiTujuan = int.parse(_lantaiCtrl.text);
+
+    setState(() {
+      _filterRuanganList = _listHistori.where((ruangan) {
+        return ruangan.gedung == _gedungCtrl.text &&
+            ruangan.lantai == angkaLantaiTujuan;
+      }).toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    double halfWidth = (MediaQuery.of(context).size.width - 42) / 2;
+    final displayList = _filterRuanganList.isEmpty
+        ? _listHistori
+        : _filterRuanganList;
 
     return Scaffold(
       appBar: const AppNavbar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: AppText(text: "Peminjaman Ruangan", mode: TextMode.header),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(
+          right: 20,
+          left: 20,
+          top: 30,
+          bottom: 10,
+        ),
+        child: Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              24.0,
+            ), // Higher number = more rounded
           ),
-          const SizedBox(height: 16),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 15.0,
+              left: 15.0,
+              top: 24,
+              bottom: 40,
+            ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: AppDropDown(
-                        ddCtrl: gedungFilterCtrl,
-                        data: listGedung,
-                        ddLabel: "Gedung",
-                        size: 2,
-                        margin: 0,
-                        iconChoice: DdIcon.gedung,
-                      ),
-                    ),
-                    const SizedBox(width: 10), 
-                    Expanded(
-                      child: AppDropDown(
-                        ddCtrl: lantaiFilterCtrl,
-                        data: listLantai,
-                        ddLabel: "Lantai",
-                        size: 2,
-                        margin: 0,
-                        iconChoice: DdIcon.lantai,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 12.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      AppText(text: "Peminjaman Ruangan", mode: TextMode.gede),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ButtonAction(
-                      text: "Tambahkan",
-                      icon: Icons.add,
-                      width: halfWidth,
-                      margin: EdgeInsets.zero,
-                      posisi: Alignment.centerLeft,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TambahPeminjamanPage(),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    ButtonAction(
-                      text: "Filter",
-                      icon: Icons.search,
-                      width: halfWidth,
-                      margin: EdgeInsets.zero,
-                      posisi: Alignment.centerRight,
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              "Memfilter: ${gedungFilterCtrl.text.isEmpty ? 'Semua' : gedungFilterCtrl.text} - ${lantaiFilterCtrl.text.isEmpty ? 'Semua' : lantaiFilterCtrl.text}"
+                      const SizedBox(height: 20),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AppDropDown(
+                              ddCtrl: _gedungCtrl,
+                              data: _dataGedung,
+                              ddLabel: "Gedung",
+                              size: 1,
+                              margin: 0,
+                              iconChoice: DdIcon.gedung,
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ],
+
+                          const SizedBox(width: 12),
+
+                          Expanded(
+                            child: AppDropDown(
+                              key: UniqueKey(),
+                              ddCtrl: _lantaiCtrl,
+                              data: _dataLantai,
+                              ddLabel: "Lantai",
+                              size: 1,
+                              margin: 0,
+                              iconChoice: DdIcon.lantai,
+                            ),
+                          ),
+
+                          const SizedBox(width: 12),
+
+                          Expanded(
+                            child: AppDropDown(
+                              key: UniqueKey(),
+                              ddCtrl: _statusCtrl,
+                              data: _dataStatus,
+                              ddLabel: "Lantai",
+                              size: 1,
+                              margin: 0,
+                              iconChoice: DdIcon.status,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      Row(
+                        children: [
+                          ButtonAction(
+                            text: "Filter",
+                            icon: Icons.search,
+                            width: 120,
+                            height: 42,
+                            posisi: Alignment.centerRight,
+                            margin: const EdgeInsets.only(bottom: 20),
+                            onPressed: _eksekusiFilter,
+                          ),
+                        ],
+                      ),
+
+                      AppText(
+                        text: "List Peminjaman Ruangan:",
+                        mode: TextMode.header,
+                      ),
+
+                      const SizedBox(height: 6),
+                    ],
+                  ),
+                ),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: displayList.length,
+                  itemBuilder: (context, index) {
+                    final ruangan = displayList[index];
+
+                    return PeminjamanCard(
+                      item: PeminjamanItem(
+                        id: ruangan.id,
+                        gedung: ruangan.gedung,
+                        lantai: ruangan.lantai,
+                        namaRuangan: ruangan.namaRuangan,
+                        statusPinjaman: ruangan.statusPinjaman,
+                        start: ruangan.start,
+                        end: ruangan.end,
+                        yesAction: () {
+
+                        },
+
+                        noAction: () {
+
+                        }
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          const Divider(thickness: 1, height: 1),
-
-          Expanded(
-            child: _peminjamanData.isEmpty
-                ? const Center(
-                    child: Text(
-                      "Belum ada riwayat peminjaman ruangan.",
-                      style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.all(12.0),
-                    itemCount: _peminjamanData.length,
-                    itemBuilder: (context, index) => const SizedBox.shrink(),
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-class TambahPeminjamanPage extends StatefulWidget {
-  const TambahPeminjamanPage({super.key});
-
-  @override
-  State<TambahPeminjamanPage> createState() => _TambahPeminjamanPageState();
-}
-
-class _TambahPeminjamanPageState extends State<TambahPeminjamanPage> {
-  final TextEditingController namaRuanganCtrl = TextEditingController();
-  final TextEditingController gedungCtrl = TextEditingController();
-  final TextEditingController lantaiCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    namaRuanganCtrl.dispose();
-    gedungCtrl.dispose();
-    lantaiCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppNavbar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: AppText(text: "Tambahkan Peminjaman", mode: TextMode.header),
-          ),
-          const SizedBox(height: 16),
-
-
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1.2),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FormBar(
-                              formCtrl: namaRuanganCtrl,
-                              formLabel: "Nama Ruangan",
-                              size: 3,
-                              margin: 4,
-                            ),
-                            const SizedBox(height: 12),
-                            FormBar(
-                              formCtrl: gedungCtrl,
-                              formLabel: "Nama Gedung",
-                              size: 3,
-                              margin: 4,
-                            ),
-                            const SizedBox(height: 12),
-                            FormBar(
-                              formCtrl: lantaiCtrl,
-                              formLabel: "Posisi Lantai",
-                              size: 3,
-                              margin: 4,
-                              formIcon: FormIcon.nim, 
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  ButtonAction(
-                    text: "Tambahkan",
-                    icon: Icons.check_circle_outline,
-                    width: 150,
-                    margin: const EdgeInsets.only(bottom: 16),
-                    posisi: Alignment.centerRight,
-                    onPressed: () {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Permohonan Peminjaman Berhasil Ditambahkan!")),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
