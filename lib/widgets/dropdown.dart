@@ -4,6 +4,7 @@ enum DdIcon {
   none,
   gedung,
   lantai,
+  status,
 }
 
 class AppDropDown extends StatefulWidget {
@@ -63,7 +64,8 @@ class _DropDownState extends State<AppDropDown> {
     return switch (widget.iconChoice) {
       DdIcon.none => null,
       DdIcon.gedung  => const Icon(Icons.home_work_sharp),
-      DdIcon.lantai => const Icon(Icons.flourescent_outlined)
+      DdIcon.lantai => const Icon(Icons.flourescent_outlined),
+      DdIcon.status => const Icon(Icons.line_style)
     };
   }
 
@@ -76,7 +78,7 @@ class _DropDownState extends State<AppDropDown> {
 
         child: DropdownMenu<String>(
             controller: widget.ddCtrl,
-            label: Text(widget.ddLabel),
+            label: widget.size == 1 ? null : Text(widget.ddLabel),
             leadingIcon: _tentukanIcon(),
             width: _cariWidth(context) - (widget.margin * 2),
             dropdownMenuEntries: _ddData.map((item) => DropdownMenuEntry<String>(

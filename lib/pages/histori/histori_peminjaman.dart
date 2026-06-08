@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
-import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'package:korlap_online_upi/widgets/list_gedung.dart';
 
 class HistoriPeminjamanPage extends StatefulWidget {
   const HistoriPeminjamanPage({super.key});
@@ -91,7 +89,7 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 32.0),
                           child: Text(
-                            "Belum ada histori peminjaman.",
+                            "Belum ada pengajuan peminjaman.",
                             style: TextStyle(
                               color: Colors.grey,
                               fontStyle: FontStyle.italic,
@@ -117,16 +115,6 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
                               statusPinjaman: itemHistori.statusPinjaman,
                               start: itemHistori.start,
                               end: itemHistori.end,
-                              onAction: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Detail Arsip: ${itemHistori.namaRuangan}",
-                                    ),
-                                    duration: const Duration(seconds: 1),
-                                  ),
-                                );
-                              },
                             ),
                           );
                         },

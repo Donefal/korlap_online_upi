@@ -54,7 +54,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MPruanganPage(),
+                            builder: (context) => const ManageRuanganPage(),
                           ),
                         );
                       },
