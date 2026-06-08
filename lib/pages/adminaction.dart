@@ -39,7 +39,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
               
               Center(child: AppText(text: "Admin action", mode: TextMode.gede)),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: 64),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,47 +63,6 @@ class _AdminActionPageState extends State<AdminActionPage> {
 
                   Expanded(
                     child: ButtonMenu(
-                      text: "Tambahkan broadcast",
-                      desc: "Tambahkan broadcast",
-                      icon: Icons.campaign_rounded,
-                      margin: EdgeInsets.zero,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BroadcastPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 25),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: ButtonMenu(
-                      text: "Manage ruangan",
-                      desc: "Manage ruangan",
-                      icon: Icons.holiday_village_rounded,
-                      margin: EdgeInsets.zero,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MRuanganPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  Expanded(
-                    child: ButtonMenu(
                       text: "Manage akun",
                       desc: "Manage akun user dan admin",
                       icon: Icons.manage_accounts_rounded,
@@ -118,8 +77,10 @@ class _AdminActionPageState extends State<AdminActionPage> {
                       },
                     ),
                   ),
+
                 ],
               ),
+
             ],
           ),
         ),
