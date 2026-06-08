@@ -24,7 +24,7 @@ class _UserHomeViewState extends State<UserHomeView> {
   @override
   Widget build(BuildContext context){
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(right: 20, left: 20, top: 30),
+      padding: const EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 10),
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(

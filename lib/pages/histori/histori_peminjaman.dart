@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'package:korlap_online_upi/widgets/list_gedung.dart'; 
+import 'package:korlap_online_upi/widgets/list_gedung.dart';
 
 class HistoriPeminjamanPage extends StatefulWidget {
   const HistoriPeminjamanPage({super.key});
@@ -17,7 +17,7 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
       gedung: "Gedung B",
       lantai: 1,
       namaRuangan: "Ruang Prodi Teknik Komputer",
-      status: "sudah dipinjam", 
+      status: "sudah dipinjam",
       jenisRuangan: "Ruangan Prodi",
     ),
     const RuanganItem(
@@ -25,7 +25,7 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
       gedung: "Gedung E",
       lantai: 1,
       namaRuangan: "20.4E.01.001",
-      status: "tersedia", 
+      status: "tersedia",
       jenisRuangan: "Ruang Kelas",
     ),
   ];
@@ -33,62 +33,92 @@ class _HistoriPeminjamanPageState extends State<HistoriPeminjamanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: const AppNavbar(),
-      
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
 
-          const Padding(
-            padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-            child: Text(
-              "Histori Peminjaman",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(
+          right: 20,
+          left: 20,
+          top: 30,
+          bottom: 10,
+        ),
+        child: Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              24.0,
+            ), 
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 15,
+              left: 15,
+              top: 24,
+              bottom: 40,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                  child: Text(
+                    "Histori Peminjaman",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+
+                _listHistori.isEmpty
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 32.0),
+                          child: Text(
+                            "Belum ada histori peminjaman.",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(bottom: 16),
+                        itemCount: _listHistori.length,
+                        itemBuilder: (context, index) {
+                          final itemHistori = _listHistori[index];
+
+                          return RuanganCard(
+                            item: RuanganItem(
+                              id: itemHistori.id,
+                              gedung: itemHistori.gedung,
+                              lantai: itemHistori.lantai,
+                              namaRuangan: itemHistori.namaRuangan,
+                              status: itemHistori.status,
+                              jenisRuangan: itemHistori.jenisRuangan,
+                              onPinjam: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Detail Arsip: ${itemHistori.namaRuangan}",
+                                    ),
+                                    duration: const Duration(seconds: 1),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+              ],
             ),
           ),
-
-          Expanded(
-            child: _listHistori.isEmpty
-                ? const Center(
-                    child: Text(
-                      "Belum ada histori peminjaman.",
-                      style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    itemCount: _listHistori.length,
-                    itemBuilder: (context, index) {
-                      final itemHistori = _listHistori[index];
-                      
-                      return RuanganCard(
-                        item: RuanganItem(
-                          id: itemHistori.id,
-                          gedung: itemHistori.gedung,
-                          lantai: itemHistori.lantai,
-                          namaRuangan: itemHistori.namaRuangan,
-                          status: itemHistori.status,
-                          jenisRuangan: itemHistori.jenisRuangan,
-                          onPinjam: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("Detail Arsip: ${itemHistori.namaRuangan}"),
-                                duration: const Duration(seconds: 1),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-          ),
-        ],
+        ),
       ),
     );
   }
