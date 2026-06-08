@@ -35,11 +35,40 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Korlap Digital (Kodig)',
       debugShowCheckedModeBanner: false,
-      //TODO: Nanti ini diganti ke AuthGate() default nya 
+      
+      // 1. Seting warna fallback dasar aplikasi
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFFF5F6FA), // Abu-abu bersih
+      ),
+      
+      // 2. 🟢 SUNTIKAN GRADIENT GLOBAL DI SINI 🟢
+      builder: (context, child) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color.fromARGB(255, 73, 179, 255),       // Efek biru soft di bagian atas
+                const Color.fromARGB(255, 245, 248, 250),  // Gradasi ke flat abu-abu di bagian bawah
+              ],
+            ),
+          ),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              // Bikin warna dasar Scaffold bawaan jadi transparan 
+              // supaya lapisan gradient di Container belakangnya kelihatan menembus
+              scaffoldBackgroundColor: Colors.transparent, 
+            ),
+            child: child!,
+          ),
+        );
+      },
+      
+      // TODO: Nanti ini diganti ke AuthGate() default nya 
       // TestPage() untuk nge test page
-      home: const UserHomeView()
-      )
-      ;
-    }
+      home: const UserHomeView(),
+    );
+  }
 }
 

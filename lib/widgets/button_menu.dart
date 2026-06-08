@@ -11,6 +11,7 @@ class ButtonMenu extends StatelessWidget {
   final double height;
   final Alignment posisi;
   final EdgeInsetsGeometry margin;
+  final bool disable;
 
   /// Custom ButtonMenu (Ikon di atas, Teks di bawah)
   /// 
@@ -37,7 +38,8 @@ class ButtonMenu extends StatelessWidget {
     this.textColor = const Color.fromARGB(255, 0, 128, 255),
     this.height = 100, 
     this.posisi = Alignment.topCenter,
-    this.margin = const EdgeInsets.only(bottom: 20),
+    this.margin = const EdgeInsets.all(20),
+    this.disable = false,
   });
 
   // Helper method untuk membangun indikator loading
@@ -91,25 +93,28 @@ class ButtonMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double halfWidth = MediaQuery.of(context).size.width / 2 - 20;
-    return Padding(
-      padding: margin,
-      child: Align(
-        alignment: posisi,
-        child: SizedBox(
-          width: halfWidth,
-          height: height,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              alignment: Alignment.topLeft,
-              backgroundColor: backgroundColor,
-              elevation: isLoading ? 0 : 2,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      child: Padding(
+        padding: margin,
+        child: Align(
+          alignment: posisi,
+          child: SizedBox(
+            width: halfWidth,
+            height: height,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                alignment: Alignment.topLeft,
+                backgroundColor: backgroundColor,
+                elevation: isLoading ? 0 : 5,
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
+              onPressed: disable||isLoading ? null : onPressed,
+              child: isLoading ? _buildLoadingIndicator() : _buildButtonContent(),
             ),
-            onPressed: isLoading ? null : onPressed,
-            child: isLoading ? _buildLoadingIndicator() : _buildButtonContent(),
           ),
         ),
       ),

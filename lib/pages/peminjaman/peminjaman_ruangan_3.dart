@@ -4,6 +4,7 @@ import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
 import 'package:korlap_online_upi/widgets/button_aksi.dart';   
 import 'package:korlap_online_upi/widgets/list_gedung.dart';   
 import 'package:korlap_online_upi/widgets/form_bar.dart';      
+import 'package:file_picker/file_picker.dart'; 
 
 class FormPengajuanPage extends StatefulWidget {
   final RuanganItem ruangan;
@@ -15,22 +16,74 @@ class FormPengajuanPage extends StatefulWidget {
 }
 
 class _FormPengajuanPageState extends State<FormPengajuanPage> {
-
-  final TextEditingController _nimCtrl = TextEditingController();
+  final TextEditingController _namaKegiatanCtrl = TextEditingController();
   final TextEditingController _keperluanCtrl = TextEditingController();
+
+  TimeOfDay? _waktuMulai;
+  TimeOfDay? _waktuSelesai;
+
+  String? _namaFileSK;
+  String? _namaFilePM;
 
   @override
   void dispose() {
-    _nimCtrl.dispose();
+    _namaKegiatanCtrl.dispose();
     _keperluanCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _pilihWaktu(BuildContext context, bool isMulai) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        if (isMulai) {
+          _waktuMulai = picked;
+        } else {
+          _waktuSelesai = picked;
+        }
+      });
+    }
+  }
+
+Future<void> _pilihFile(String jenisFile) async {
+    try {
+      // Memanggil picker dokumen
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'png'],
+      );
+
+      // Pengecekan null safety yang ramah untuk compiler Flutter Web
+      if (result != null && result.files.isNotEmpty) {
+        final platformFile = result.files.first;
+        final String? namaTerpilih = platformFile.name;
+        
+        if (namaTerpilih != null && namaTerpilih.isNotEmpty) {
+          setState(() {
+            if (jenisFile == 'SK') {
+              _namaFileSK = namaTerpilih;
+            } else if (jenisFile == 'PM') {
+              _namaFilePM = namaTerpilih;
+            }
+          });
+        }
+      } else {
+        // User membatalkan pemilihan file
+        print("Pemilihan file $jenisFile dibatalkan oleh user.");
+      }
+    } catch (errorDetail) {
+      // 🔥 FIX: Cetak pesan error asli dari engine browser ke console untuk melacak kendala
+      print("DETAIL ERROR PICKER ASLI: $errorDetail");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppNavbar(),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -65,34 +118,96 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
                       onPinjam: null,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 55),
 
                   const Text(
                     "Formulir Data Pengajuan:",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 10),
-
+                  const SizedBox(height: 20),
 
                   FormBar(
-                    formCtrl: _nimCtrl,
-                    formLabel: "NIM Peminjam",
+                    formCtrl: _namaKegiatanCtrl,
+                    formLabel: "Nama Kegiatan / Acara",
                     size: 3,
                     margin: 0,
-                    formIcon: FormIcon.nim, 
+                    formIcon: FormIcon.none, 
                   ),
-                  
                   const SizedBox(height: 14), 
                   
                   FormBar(
                     formCtrl: _keperluanCtrl,
-                    formLabel: "Keperluan / Nama Acara",
+                    formLabel: "Detail Keperluan Acara",
                     size: 3,
                     margin: 0,
-                    formIcon: FormIcon.none, // 
+                    formIcon: FormIcon.none, 
+                  ),
+                  const SizedBox(height: 30),
+
+                  const Text(
+                    "Waktu Peminjaman Ruangan:",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => _pilihWaktu(context, true),
+                          icon: const Icon(Icons.access_time_filled_rounded, size: 18),
+                          label: Text(
+                            _waktuMulai == null 
+                                ? "Jam Mulai" 
+                                : "Mulai: ${_waktuMulai!.format(context)}",
+                            style: const TextStyle(fontSize: 13),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            side: BorderSide(color: _waktuMulai != null ? Colors.blue : Colors.grey),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => _pilihWaktu(context, false),
+                          icon: const Icon(Icons.access_time_rounded, size: 18),
+                          label: Text(
+                            _waktuSelesai == null 
+                                ? "Jam Selesai" 
+                                : "Selesai: ${_waktuSelesai!.format(context)}",
+                            style: const TextStyle(fontSize: 13),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            side: BorderSide(color: _waktuSelesai != null ? Colors.blue : Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    "Unggah Dokumen Pendukung (SK & PM):",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 10),
+
+                  _buildUploadBox(
+                    label: "Upload Surat Kegiatan (SK)",
+                    fileName: _namaFileSK,
+                    onTap: () => _pilihFile('SK'),
+                  ),
+                  const SizedBox(height: 12),
+
+                  _buildUploadBox(
+                    label: "Upload Surat Peminjaman (SPM)",
+                    fileName: _namaFilePM,
+                    onTap: () => _pilihFile('SPM'),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 36),
 
                   ButtonAction(
                     text: "Ajukan",
@@ -103,24 +218,31 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
                     margin: const EdgeInsets.only(bottom: 20),
                     backgroundColor: Colors.green,
                     onPressed: () {
-
-                      if (_nimCtrl.text.isEmpty || _keperluanCtrl.text.isEmpty) {
+                      if (_namaKegiatanCtrl.text.isEmpty || 
+                          _keperluanCtrl.text.isEmpty || 
+                          _waktuMulai == null || 
+                          _waktuSelesai == null || 
+                          _namaFileSK == null || 
+                          _namaFilePM == null) {
+                        
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("Harap isi NIM dan Keperluan terlebih dahulu!"),
+                            content: Text("Harap lengkapi semua form, waktu, dan file dokumen!"),
                             backgroundColor: Colors.redAccent,
                           ),
                         );
                         return;
                       }
 
-                      print("NIM: ${_nimCtrl.text}");
+                      print("Nama Kegiatan: ${_namaKegiatanCtrl.text}");
                       print("Keperluan: ${_keperluanCtrl.text}");
-                      print("Mengajukan ruangan: ${widget.ruangan.namaRuangan}");
-                      
+                      print("Durasi: ${_waktuMulai!.format(context)} s/d ${_waktuSelesai!.format(context)}");
+                      print("File SK: $_namaFileSK");
+                      print("File PM: $_namaFilePM");
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("Pengajuan atas NIM ${_nimCtrl.text} Berhasil Dikirim!"),
+                          content: Text("Pengajuan Acara ${_namaKegiatanCtrl.text} Berhasil Dikirim!"),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -134,7 +256,6 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
           ),
         ],
       ),
-
       bottomNavigationBar: AppBottomNav(
         currentIndex: 0,
         onDestinationSelected: (int index) {
@@ -142,6 +263,52 @@ class _FormPengajuanPageState extends State<FormPengajuanPage> {
             Navigator.popUntil(context, (route) => route.isFirst);
           }
         },
+      ),
+    );
+  }
+
+  // 🔥 FIX: Mengubah pengecekan if-spread menjadi ternary biasa agar aman dirender di Web
+  Widget _buildUploadBox({required String label, required String? fileName, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: fileName == null ? Colors.grey.shade100 : Colors.green.shade50,
+          border: Border.all(color: fileName == null ? Colors.grey.shade400 : Colors.green),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              fileName == null ? Icons.cloud_upload_rounded : Icons.check_circle_rounded,
+              color: fileName == null ? Colors.grey.shade700 : Colors.green,
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                  ),
+                  fileName != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text(
+                            fileName,
+                            style: const TextStyle(fontSize: 11, color: Colors.black54, fontStyle: FontStyle.italic),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

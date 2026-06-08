@@ -41,7 +41,7 @@ class _UserHomeViewState extends State<UserHomeView> {
             const SizedBox(height: 60),
 
             BannerCarousel(
-              height: 350,
+              height: 250,
               banners: [
                 BannerItem(
                   text: "Selamat datang",
@@ -92,8 +92,14 @@ class _UserHomeViewState extends State<UserHomeView> {
                   },
                 ),
                 ),
+              ],
+            ),
 
-                Expanded(child:
+            const SizedBox(height: 25),
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child:
                   ButtonMenu(
                   text: "Histori Peminjaman",                    
                   desc: "Histori Peminjaman",
@@ -106,9 +112,25 @@ class _UserHomeViewState extends State<UserHomeView> {
                       );
                   },
                 ),
+                ),
+
+
+                Expanded(child:
+                  ButtonMenu(
+                  text: "Coming Soon",                    
+                  desc: "Coming Soon",
+                  icon: Icons.timelapse,
+                  margin: EdgeInsets.zero,
+                  disable: true,
+                  onPressed: (){
+
+                  }
+                ),
                 )
-              ],
-            ),
+            ]
+            )
+
+            
           ],
         ),
       ),
