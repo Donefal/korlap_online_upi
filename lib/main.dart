@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:korlap_online_upi/main_gate.dart';
-import 'package:korlap_online_upi/session_provider.dart';
+import 'package:korlap_online_upi/providers/session_provider.dart';
 import 'package:korlap_online_upi/widgets/auth_gate.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 1. Membuat objek session dan mengisi datanya dari SharedPreferences
   final session = SessionProvider();
   await session.restore();
 
   runApp(
     ChangeNotifierProvider(
-      create: (context) => SessionProvider(),
+      // 2. PERBAIKAN: Masukkan variabel 'session' yang sudah terisi data tadi ke sini
+      create: (context) => session, 
       child: const MyApp(),
     ),
   );
@@ -57,8 +59,7 @@ class MyApp extends StatelessWidget {
         );
       },
       
-      // TODO: Nanti ini diganti ke AuthGate() default nya 
-      // TestPage() untuk nge test page
+      // Mengarah ke AuthGate yang bertugas sebagai satpam halaman
       home: const AuthGate(),
     );
   }
