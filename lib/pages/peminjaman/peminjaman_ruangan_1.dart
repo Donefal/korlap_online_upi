@@ -9,6 +9,10 @@ import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
 import 'package:korlap_online_upi/widgets/list_gedung.dart';
 import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
 
+// Import Model dan Service API
+import 'package:korlap_online_upi/models/ruangan_model.dart';
+import 'package:korlap_online_upi/services/ruangan_service.dart';
+
 class PeminjamanRuanganPage extends StatefulWidget {
   const PeminjamanRuanganPage({super.key});
 
@@ -26,248 +30,19 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
   final List<String> _dataGedung = ["Gedung B", "Gedung E"];
   List<String> _dataLantai = [];
 
-  final List<RuanganItem> _masterRuanganList = [
-    RuanganItem(
-      id: 1,
-      gedung: "Gedung B",
-      lantai: 1,
-      namaRuangan: "Ruang Prodi Teknik Komputer",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Prodi",
-    ),
-    RuanganItem(
-      id: 2,
-      gedung: "Gedung B",
-      lantai: 2,
-      namaRuangan: "Laboratorium Bahasa",
-      status: "Tersedia",
-      jenisRuangan: "Laboratorium",
-    ),
-    RuanganItem(
-      id: 3,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.007",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 4,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.009",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Microteaching",
-    ),
-    RuanganItem(
-      id: 5,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.010",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Microteaching",
-    ),
-    RuanganItem(
-      id: 6,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "Embedded & Network Laboratory",
-      status: "Tersedia",
-      jenisRuangan: "Laboratorium",
-    ),
-    RuanganItem(
-      id: 7,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.001",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 8,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "Audio Visual Laboratory",
-      status: "Tersedia",
-      jenisRuangan: "Laboratorium",
-    ),
-    RuanganItem(
-      id: 9,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "Laboratorium Komputer Pendidikan",
-      status: "Tersedia",
-      jenisRuangan: "Laboratorium",
-    ),
-    RuanganItem(
-      id: 10,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.002",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 11,
-      gedung: "Gedung B",
-      lantai: 4,
-      namaRuangan: "20.4B.04.001",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 12,
-      gedung: "Gedung B",
-      lantai: 4,
-      namaRuangan: "20.4B.04.002",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 13,
-      gedung: "Gedung B",
-      lantai: 4,
-      namaRuangan: "20.4B.04.009",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 14,
-      gedung: "Gedung B",
-      lantai: 4,
-      namaRuangan: "20.4B.04.005",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 15,
-      gedung: "Gedung B",
-      lantai: 3,
-      namaRuangan: "20.4B.03.006",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 16,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.005",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 17,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.007",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 18,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.008",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 19,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.009",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 20,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.000",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 21,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.002",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 22,
-      gedung: "Gedung B",
-      lantai: 5,
-      namaRuangan: "20.4B.05.001",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-
-    RuanganItem(
-      id: 23,
-      gedung: "Gedung E",
-      lantai: 1,
-      namaRuangan: "20.4E.01.004",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 24,
-      gedung: "Gedung E",
-      lantai: 2,
-      namaRuangan: "20.4E.02.006",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 25,
-      gedung: "Gedung E",
-      lantai: 1,
-      namaRuangan: "20.4E.01.001",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 26,
-      gedung: "Gedung E",
-      lantai: 3,
-      namaRuangan: "20.4E.03.003",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 27,
-      gedung: "Gedung E",
-      lantai: 3,
-      namaRuangan: "20.4E.03.002",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 28,
-      gedung: "Gedung E",
-      lantai: 3,
-      namaRuangan: "20.4E.03.001",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-    RuanganItem(
-      id: 29,
-      gedung: "Gedung E",
-      lantai: 3,
-      namaRuangan: "20.4E.03.000",
-      status: "Tersedia",
-      jenisRuangan: "Ruang Kelas",
-    ),
-  ];
-
-  List<RuanganItem> _filterRuanganList = [];
+  // Inisialisasi Service dan State manajemen penampung data dari database PHP
+  final RuanganService _ruanganService = RuanganService();
+  List<RuanganModel> _masterRuanganList = [];
+  List<RuanganModel> _filterRuanganList = [];
+  
+  bool _isLoading = true;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
     _gedungCtrl.addListener(_onGedungChanged);
+    _muatDataRuanganFromServer(); // Ambil data saat halaman dibuka
   }
 
   @override
@@ -276,6 +51,21 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
     _gedungCtrl.dispose();
     _lantaiCtrl.dispose();
     super.dispose();
+  }
+
+  Future<void> _muatDataRuanganFromServer() async {
+    try {
+      final data = await _ruanganService.fetchRuangan();
+      setState(() {
+        _masterRuanganList = data;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+        _isLoading = false;
+      });
+    }
   }
 
   void _onGedungChanged() {
@@ -301,54 +91,37 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
       return;
     }
 
-    final int angkaLantaiTujuan = int.parse(_lantaiCtrl.text);
-
     setState(() {
       _filterRuanganList = _masterRuanganList.where((ruangan) {
-        return ruangan.gedung == _gedungCtrl.text &&
-            ruangan.lantai == angkaLantaiTujuan;
+        return ruangan.gedung.toLowerCase() == _gedungCtrl.text.toLowerCase() &&
+            ruangan.lantai == _lantaiCtrl.text;
       }).toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final displayList = _filterRuanganList.isEmpty
+    // Tentukan daftar render berdasarkan status filter pencarian
+    final displayList = _filterRuanganList.isEmpty && _gedungCtrl.text.isEmpty
         ? _masterRuanganList
         : _filterRuanganList;
 
     return Scaffold(
       appBar: const AppNavbar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          right: 20,
-          left: 20,
-          top: 30,
-          bottom: 10,
-        ),
+        padding: const EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 10),
         child: Card(
           elevation: 10,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              24.0,
-            ), // Higher number = more rounded
+            borderRadius: BorderRadius.circular(24.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(
-              right: 15.0,
-              left: 15.0,
-              top: 24,
-              bottom: 40,
-            ),
+            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 24, bottom: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16.0,
-                    right: 16.0,
-                    top: 12.0,
-                  ),
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -405,34 +178,72 @@ class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
                   ),
                 ),
 
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: displayList.length,
-                  itemBuilder: (context, index) {
-                    final ruangan = displayList[index];
-
-                    return RuanganCard(
-                      item: RuanganItem(
-                        id: ruangan.id,
-                        gedung: ruangan.gedung,
-                        lantai: ruangan.lantai,
-                        namaRuangan: ruangan.namaRuangan,
-                        status: ruangan.status,
-                        jenisRuangan: ruangan.jenisRuangan,
-                        onPinjam: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailPeminjamanPage(ruangan: ruangan),
-                            ),
-                          );
-                        },
+                // Manajemen UI Dinamis berbasis state data API
+                if (_isLoading)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(30.0),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                else if (_errorMessage != null)
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        "Gagal memuat data ruangan:\n$_errorMessage",
+                        style: const TextStyle(color: Colors.red),
+                        textAlign: TextAlign.center,
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  )
+                else if (displayList.isEmpty)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(30.0),
+                      child: Text(
+                        "Tidak ada ruangan yang sesuai filter.",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  )
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: displayList.length,
+                    itemBuilder: (context, index) {
+                      final ruangan = displayList[index];
+
+                      return RuanganCard(
+                        item: RuanganItem(
+                          id: ruangan.id,
+                          gedung: ruangan.gedung,
+                          lantai: int.tryParse(ruangan.lantai) ?? 0, 
+                          namaRuangan: ruangan.namaRuangan,
+                          status: ruangan.status,
+                          jenisRuangan: ruangan.jenisRuangan,
+                          onPinjam: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPeminjamanPage(
+                                  ruangan: RuanganItem(
+                                    id: ruangan.id,
+                                    gedung: ruangan.gedung,
+                                    lantai: int.tryParse(ruangan.lantai) ?? 0,
+                                    namaRuangan: ruangan.namaRuangan,
+                                    status: ruangan.status,
+                                    jenisRuangan: ruangan.jenisRuangan,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
               ],
             ),
           ),
