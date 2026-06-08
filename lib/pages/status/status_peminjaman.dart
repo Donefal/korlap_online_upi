@@ -11,7 +11,7 @@ class StatusPeminjamanPage extends StatefulWidget {
 
 class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
   final List<PeminjamanItem> _listAjuan = [
-    const PeminjamanItem(
+    PeminjamanItem(
       id: 101,
       gedung: "Gedung B",
       lantai: 3,
@@ -19,8 +19,9 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
       statusPinjaman: "Sedang diajukan",
       start: TimeOfDay(hour: 12, minute: 0),
       end: TimeOfDay(hour: 14, minute: 0),
+      date: DateTime(2026, 6, 9),
     ),
-    const PeminjamanItem(
+    PeminjamanItem(
       id: 102,
       gedung: "Gedung B",
       lantai: 3,
@@ -28,6 +29,7 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
       statusPinjaman: "Diterima", // this won't show
       start: TimeOfDay(hour: 9, minute: 0),
       end: TimeOfDay(hour: 11, minute: 0),
+      date: DateTime(2026, 6, 9),
     ),
   ];
 
