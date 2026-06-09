@@ -52,29 +52,7 @@ class _MAkunPageState extends State<MAkunPage> {
                 ),
                 const SizedBox(height: 16),
 
-                // 2. Search Field
-                TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: "(Cari Nama / ID...)",
-                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 12,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: const BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: const BorderSide(
-                        color: Colors.blueAccent,
-                        width: 1.5,
-                      ),
-                    ),
-                  ),
-                ),
+                
                 const SizedBox(height: 10),
 
                 // 3. Action Buttons Row
@@ -98,21 +76,7 @@ class _MAkunPageState extends State<MAkunPage> {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Expanded(
-                      child: ButtonMenu(
-                        text: "Filter",
-                        desc: "",
-                        icon: Icons.filter_list,
-                        margin: EdgeInsets.zero,
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Modal Filter Dipicu"),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                   
                   ],
                 ),
                 const SizedBox(height: 16),

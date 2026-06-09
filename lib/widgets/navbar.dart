@@ -1,16 +1,15 @@
 import "package:flutter/material.dart";
+import "package:korlap_online_upi/pages/profil/profil.dart";
 
 class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
   const AppNavbar({super.key});
 
   void _navigateToAccountMenu(BuildContext context) {
-    // Navigator.push(
-    //   context, 
-    //   // TODO: AccoutPage() diubah sesuai dengan page akun yang dibutuhkan
-    //   MaterialPageRoute(builder: (context) => const AccountPage()) 
-    // ).then((value) {
-    //     // TODO: Nanti refresh page disini
-    // });
+    Navigator.push(
+      context, 
+      // TODO: AccoutPage() diubah sesuai dengan page akun yang dibutuhkan
+      MaterialPageRoute(builder: (context) => const ProfilPage()) 
+    );
   }
 
   @override
