@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:korlap_online_upi/pages/adminaction.dart';
-import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
-import 'package:korlap_online_upi/widgets/dropdown.dart';
+import 'package:korlap_online_upi/pages/more_peminjaman/confirm_pengajuan.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
-import 'package:korlap_online_upi/widgets/navbar.dart';
-import 'package:korlap_online_upi/widgets/button_aksi.dart';
-import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'package:korlap_online_upi/widgets/list_gedung.dart';
-import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
 import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 
 class ManageRuanganPage extends StatefulWidget {
@@ -18,6 +11,14 @@ class ManageRuanganPage extends StatefulWidget {
 }
 
 class _ManageRuanganPageState extends State<ManageRuanganPage> {
+    void _moveToAction(int id) {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder:(context) => ConfirmPengajuanPage(id: id))
+    );
+
+  }
+
   final TextEditingController _gedungCtrl = TextEditingController();
   final TextEditingController _lantaiCtrl = TextEditingController();
   final TextEditingController _statusCtrl = TextEditingController();
@@ -247,19 +248,15 @@ class _ManageRuanganPageState extends State<ManageRuanganPage> {
                         id: ruangan.id,
                         gedung: ruangan.gedung,
                         lantai: ruangan.lantai,
-                        namaRuangan: ruangan.namaRuangan,
+                        namaRuangan: ruangan.namaRuangan, 
                         statusPinjaman: ruangan.statusPinjaman,
                         start: ruangan.start,
                         end: ruangan.end,
                         date: ruangan.date,
                         
-                        yesAction: () {
-
+                        action:() {
+                          _moveToAction(ruangan.id);
                         },
-
-                        noAction: () {
-
-                        }
                       ),
                     );
                   },

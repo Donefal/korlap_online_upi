@@ -9,7 +9,6 @@ class MAkunPage extends StatefulWidget {
 }
 
 class _MAkunPageState extends State<MAkunPage> {
-  final int _currentIndex = 2;
   final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, dynamic>> _akunData = [];
@@ -229,103 +228,129 @@ class _DetailMAkunPageState extends State<DetailMAkunPage> {
     return Scaffold(
       appBar: const AppNavbar(), // Widget kustom tim
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-
-              AppText(
-                text: widget.isNewUser
-                    ? "Tambah Akun Pengguna"
-                    : "Detail Pengguna",
-                mode: TextMode.header,
-              ),
-              const SizedBox(height: 20),
-
-              _buildInputField(
-                "Nama Lengkap",
-                "Masukkan nama...",
-                _namaController,
-              ),
-              const SizedBox(height: 14),
-              _buildInputField(
-                "Nomor Induk (NIM / NIP)",
-                "Masukkan nomor induk...",
-                _nomorIndukController,
-              ),
-              const SizedBox(height: 14),
-
-              const Text(
-                "Role Otoritas",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
-              const SizedBox(height: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade400),
-                  borderRadius: BorderRadius.circular(6),
+        padding: const EdgeInsets.only(
+          right: 20,
+          left: 20,
+          top: 30,
+          bottom: 10,
+        ),
+        child: Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 15,
+              left: 15,
+              top: 24,
+              bottom: 40,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // 1. Header Title
+                AppText(
+                  text: widget.isNewUser
+                      ? "Tambah Akun Pengguna"
+                      : "Detail Pengguna",
+                  mode: TextMode.header,
                 ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _selectedRoleForm,
-                    isExpanded: true,
-                    items: const [
-                      DropdownMenuItem(value: "Admin", child: Text("Admin")),
-                      DropdownMenuItem(value: "Korlap", child: Text("Korlap")),
-                      DropdownMenuItem(
-                        value: "Mahasiswa",
-                        child: Text("Mahasiswa"),
-                      ),
-                    ],
-                    onChanged: (val) {
-                      if (val != null) setState(() => _selectedRoleForm = val);
-                    },
+                const SizedBox(height: 20),
+
+                // 2. Input Fields
+                _buildInputField(
+                  "Nama Lengkap",
+                  "Masukkan nama...",
+                  _namaController,
+                ),
+                const SizedBox(height: 14),
+
+                _buildInputField(
+                  "Nomor Induk (NIM / NIP)",
+                  "Masukkan nomor induk...",
+                  _nomorIndukController,
+                ),
+                const SizedBox(height: 14),
+
+                // 3. Role Selection Dropdown
+                const Text(
+                  "Role Otoritas",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+                const SizedBox(height: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: _selectedRoleForm,
+                      isExpanded: true,
+                      items: const [
+                        DropdownMenuItem(value: "Admin", child: Text("Admin")),
+                        DropdownMenuItem(
+                          value: "Korlap",
+                          child: Text("Korlap"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Mahasiswa",
+                          child: Text("Mahasiswa"),
+                        ),
+                      ],
+                      onChanged: (val) {
+                        if (val != null)
+                          setState(() => _selectedRoleForm = val);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 14),
-              const Text(
-                "Status Akun",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
-              const SizedBox(height: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade400),
-                  borderRadius: BorderRadius.circular(6),
+                const SizedBox(height: 14),
+
+                // 4. Status Selection Dropdown
+                const Text(
+                  "Status Akun",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _selectedStatusForm,
-                    isExpanded: true,
-                    items: const [
-                      DropdownMenuItem(value: "Aktif", child: Text("Aktif")),
-                      DropdownMenuItem(
-                        value: "Ditangguhkan",
-                        child: Text("Ditangguhkan"),
-                      ),
-                    ],
-                    onChanged: (val) {
-                      if (val != null)
-                        setState(() => _selectedStatusForm = val);
-                    },
+                const SizedBox(height: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: _selectedStatusForm,
+                      isExpanded: true,
+                      items: const [
+                        DropdownMenuItem(value: "Aktif", child: Text("Aktif")),
+                        DropdownMenuItem(
+                          value: "Ditangguhkan",
+                          child: Text("Ditangguhkan"),
+                        ),
+                      ],
+                      onChanged: (val) {
+                        if (val != null)
+                          setState(() => _selectedStatusForm = val);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 28),
+                const SizedBox(height: 28),
 
-              ButtonMenu(
-                text: widget.isNewUser ? "SIMPAN" : "PERBARUI",
-                desc: "", // Kosongkan agar teks kapital terpusat dengan baik
-                icon: Icons.save_rounded,
-                margin: EdgeInsets.zero,
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
+                // 5. Action Button
+                ButtonMenu(
+                  text: widget.isNewUser ? "SIMPAN" : "PERBARUI",
+                  desc: "",
+                  icon: Icons.save_rounded,
+                  margin: EdgeInsets.zero,
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
           ),
         ),
       ),

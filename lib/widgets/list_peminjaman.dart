@@ -11,8 +11,7 @@ class PeminjamanItem  {
   final TimeOfDay start;
   final TimeOfDay end;
   final DateTime date;
-  final VoidCallback? yesAction;
-  final VoidCallback? noAction;
+  final VoidCallback? action;
 
   const PeminjamanItem ({
     required this.id,
@@ -23,8 +22,7 @@ class PeminjamanItem  {
     required this.start,
     required this.end,
     required this.date,
-    this.yesAction,
-    this.noAction,
+    this.action
   });
 }
 
@@ -40,23 +38,13 @@ Color _tentukanColorStatus(String status) {
   };
 }
 
-Color _tentukanColorRuangan(String jenis) {
-  return switch (jenis.toLowerCase()) {
-    'laboratorium'            => Colors.blueGrey,
-    'ruang kelas'             => Colors.orange,
-    'ruang microteaching'     => Colors.blue,
-    'ruang prodi'             => Colors.deepPurpleAccent,
-    _                         => Colors.black12
-  };
-}
 
 
 class PeminjamanCard extends StatelessWidget {
   final PeminjamanItem  item;
   final bool showAction;
-  final bool showNoActionOnly;
 
-  const PeminjamanCard({super.key, required this.item, this.showAction = true, this.showNoActionOnly = false});
+  const PeminjamanCard({super.key, required this.item, this.showAction = true});
 
   @override
   Widget build(BuildContext context) {
@@ -103,24 +91,10 @@ class PeminjamanCard extends StatelessWidget {
             ),
 
             if (showAction) 
-              SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: item.yesAction,
-                      icon: const Icon(Icons.check_circle, color: Colors.green),
-                    ),
-                
-                    IconButton(
-                      onPressed: item.noAction,
-                      icon: const Icon(Icons.remove_circle, color: Colors.red),
-                    ),
-                  ],
-                ),
+              IconButton(
+                onPressed: item.action,
+                icon: const Icon(Icons.more_vert, color: Colors.black),
               ),
-
-            if (showNoActionOnly) IconButton(onPressed: item.noAction, icon: const Icon(Icons.remove_circle, color: Colors.red))
           ],
         ),
       ),

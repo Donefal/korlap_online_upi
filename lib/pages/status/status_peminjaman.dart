@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:korlap_online_upi/pages/more_peminjaman/confirm_pembatalan.dart';
 import 'package:korlap_online_upi/widgets/navbar.dart';
 import 'package:korlap_online_upi/widgets/list_peminjaman.dart';
 
@@ -10,6 +11,15 @@ class StatusPeminjamanPage extends StatefulWidget {
 }
 
 class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
+
+  void _moveToAction(int id) {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder:(context) => ConfirmPembatalanPage(id: id))
+    );
+
+  }
+
   final List<PeminjamanItem> _listAjuan = [
     PeminjamanItem(
       id: 101,
@@ -95,10 +105,24 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
                         padding: const EdgeInsets.only(bottom: 16),
                         itemCount: _listOnGoing.length,
                         itemBuilder: (context, index) {
+                          final peminjaman = _listOnGoing[index];
+
                           return PeminjamanCard(
-                            item: _listOnGoing[index],
-                            showNoActionOnly: true,
-                            showAction: false,
+                            item: PeminjamanItem(
+                              id: peminjaman.id, 
+                              gedung: peminjaman.gedung, 
+                              lantai: peminjaman.lantai, 
+                              namaRuangan: peminjaman.namaRuangan, 
+                              statusPinjaman: peminjaman.statusPinjaman, 
+                              start: peminjaman.start, 
+                              end: peminjaman.end, 
+                              date: peminjaman.date,
+
+                              action: () {
+                                _moveToAction(peminjaman.id);
+                              },
+                            ),
+                            
                           );
                         },
                       ),

@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:korlap_online_upi/pages/adminaction.dart';
-import 'package:korlap_online_upi/pages/homeview/user_home_view.dart';
-import 'package:korlap_online_upi/widgets/dropdown.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
-import 'package:korlap_online_upi/widgets/navbar.dart';
-import 'package:korlap_online_upi/widgets/button_aksi.dart';
-import 'package:korlap_online_upi/widgets/navbar_bawah.dart';
-import 'package:korlap_online_upi/widgets/list_gedung.dart';
 import 'package:korlap_online_upi/pages/peminjaman/peminjaman_ruangan_2.dart';
 
 // Import Model dan Service API
@@ -21,8 +14,6 @@ class PeminjamanRuanganPage extends StatefulWidget {
 }
 
 class _PeminjamanRuanganPageState extends State<PeminjamanRuanganPage> {
-  int _currentIndex = 0;
-  final List<Widget> _pages = [const UserHomeView(), const AdminActionPage()];
 
   final TextEditingController _gedungCtrl = TextEditingController();
   final TextEditingController _lantaiCtrl = TextEditingController();
