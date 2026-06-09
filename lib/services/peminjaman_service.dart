@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart'; // 💡 WAJIB IMPORT INI UNTUK kIsWeb
+import 'package:korlap_online_upi/models/peminjaman_model.dart';
 
 class PeminjamanService {
   // 💡 Catatan URL: 
@@ -79,6 +80,28 @@ class PeminjamanService {
       return false;
     } catch (e) {
       // Menangkap log error asli untuk mempermudah debugging jika gagal
+      throw Exception("Terjadi kesalahan sistem: $e");
+    }
+  }
+
+  Future<List<PeminjamanModel>> fetchStatusPeminjaman(int idAkun) async {
+    try {
+      final response = await http.get(Uri.parse("$baseUrl/history_peminjaman.php?id_akun=$idAkun"));
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        
+        // 💡 SINKRONISASI: Ambil list data dari key ['data'] sesuai format backend PHP Anda
+        if (jsonResponse['status'] == 'success' && jsonResponse['data'] != null) {
+          final List<dynamic> listData = jsonResponse['data'];
+          return listData.map((data) => PeminjamanModel.fromJson(data)).toList();
+        } else {
+          return []; // Jika sukses tapi data kosong
+        }
+      } else {
+        throw Exception("Gagal memuat data dari server (Status: ${response.statusCode})");
+      }
+    } catch (e) {
       throw Exception("Terjadi kesalahan sistem: $e");
     }
   }
