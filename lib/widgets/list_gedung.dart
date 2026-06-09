@@ -36,7 +36,7 @@ Color _tentukanColorRuangan(String jenis) {
     'laboratorium'            => Colors.blueGrey,
     'ruang kelas'             => Colors.orange,
     'ruang microteaching'     => Colors.blue,
-    'ruang prodi'             => Colors.deepPurpleAccent,
+    'ruangan prodi'           => Colors.deepPurpleAccent,
     _                         => Colors.black12
   };
 }

@@ -96,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                       _isLoginLoading = true;
                     });
               
-                    // 3. PROSES LOGIN ASLI KE DATABASE
                     try {
                       final authService = AuthService();
                       
@@ -107,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         String idUserStr = userData['id'].toString();
                         String role      = userData['role'];
 
-                        // Masukkan token (id) & role ke SessionProvider milik temanmu
+                        // Masukkan token (id) & role ke SessionProvider milik 
                         final sessionProvider = Provider.of<SessionProvider>(context, listen: false);
                         await sessionProvider.login(idUserStr, role);
 
@@ -119,7 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                         // Lempar ke MainGate (MainGate akan otomatis mendeteksi role baru)
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const MainGate()),
+                          MaterialPageRoute(
+                            builder: (context) => MainGate(
+                              isAdmin: role == 'admin',
+                            )),
                         );
                       }
                     } catch (error) {

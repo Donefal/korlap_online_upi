@@ -43,7 +43,7 @@ class _ProfilPageState extends State<ProfilPage> {
             onPressed: () {
               context.read<SessionProvider>().logout();
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
             },
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
           ),
@@ -71,48 +71,9 @@ class _ProfilPageState extends State<ProfilPage> {
                 // Header
                 Center(
                   child: AppText(
-                    text: "Profil Akun",
+                    text: "Aksi Akun",
                     mode: TextMode.header,
                   ),
-                ),
-                const SizedBox(height: 8),
-                Center(
-                  child: AppText(
-                    text: "Informasi Akun Anda",
-                    mode: TextMode.subheader,
-                  ),
-                ),
-                const SizedBox(height: 30),
-
-                // Account Info ListView
-                ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    _buildProfileItem(
-                      label: 'Nomor Induk',
-                      value: widget.nomorInduk ?? 'N/A',
-                      icon: Icons.badge,
-                    ),
-                    const Divider(height: 24),
-                    _buildProfileItem(
-                      label: 'Nama',
-                      value: widget.nama ?? 'N/A',
-                      icon: Icons.person,
-                    ),
-                    const Divider(height: 24),
-                    _buildProfileItem(
-                      label: 'Role',
-                      value: context.watch<SessionProvider>().role ?? 'N/A',
-                      icon: Icons.admin_panel_settings,
-                    ),
-                    const Divider(height: 24),
-                    _buildProfileItem(
-                      label: 'Instansi',
-                      value: widget.instansi ?? 'N/A',
-                      icon: Icons.business,
-                    ),
-                  ],
                 ),
 
                 const SizedBox(height: 40),
@@ -136,48 +97,6 @@ class _ProfilPageState extends State<ProfilPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildProfileItem({
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          color: Colors.blue,
-          size: 24,
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

@@ -60,6 +60,7 @@ class _AdminActionPageState extends State<AdminActionPage> {
 
                   Expanded(
                     child: ButtonMenu(
+                      disable: true,
                       text: "Akun",
                       desc: "Manage akun user dan admin",
                       icon: Icons.manage_accounts_rounded,
