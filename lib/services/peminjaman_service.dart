@@ -125,4 +125,53 @@ class PeminjamanService {
       throw Exception("Terjadi kesalahan sistem: $e");
     }
   }
+
+  Future<PeminjamanModel?> fetchDetailPeminjaman(int id) async {
+    try {
+      final response = await http.get(Uri.parse("$baseUrl/get_detail_peminjaman.php?id=$id"));
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        if (jsonResponse['status'] == 'success' && jsonResponse['data'] != null) {
+          return PeminjamanModel.fromJson(jsonResponse['data']);
+        }
+      }
+      return null;
+    } catch (e) {
+      throw Exception("Gagal memuat detail pengajuan: $e");
+    }
+  }
+
+  // 💡 FUNGSI UPDATE STATUS PENGAJUAN (TERIMA / TOLAK)
+  Future<bool> updateStatusPeminjaman(int id, String statusBaru) async {
+    try {
+      final Map<String, dynamic> requestBody = {
+        "id_peminjaman": id,
+        "status_pengajuan": statusBaru,
+        "catatan_petugas": null
+      };
+
+      final response = await http.post(
+        Uri.parse("$baseUrl/update_status_peminjaman.php"),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: json.encode(requestBody),
+      );
+
+      // Cek apa yang dimuntahkan PHP di debug console kamu
+      debugPrint("KODE RESPONS: ${response.statusCode}");
+      debugPrint("ISI RESPONS: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        return jsonResponse['status'] == 'success';
+      } else {
+        return false;
+      }
+    } catch (e) {
+      debugPrint("Terjadi kesalahan sistem: $e");
+      return false;
+    }
+  }
 }
