@@ -105,4 +105,24 @@ class PeminjamanService {
       throw Exception("Terjadi kesalahan sistem: $e");
     }
   }
+  Future<List<PeminjamanModel>> fetchAllPeminjaman() async {
+    try {
+      final response = await http.get(Uri.parse("$baseUrl/get_all_peminjaman.php"));
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        
+        if (jsonResponse['status'] == 'success' && jsonResponse['data'] != null) {
+          final List<dynamic> listData = jsonResponse['data'];
+          return listData.map((data) => PeminjamanModel.fromJson(data)).toList();
+        } else {
+          return [];
+        }
+      } else {
+        throw Exception("Gagal memuat data manajemen (Status: ${response.statusCode})");
+      }
+    } catch (e) {
+      throw Exception("Terjadi kesalahan sistem: $e");
+    }
+  }
 }
