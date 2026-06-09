@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         String idUserStr = userData['id'].toString();
                         String role      = userData['role'];
 
-                        // Masukkan token (id) & role ke SessionProvider milik temanmu
+                        // Masukkan token (id) & role ke SessionProvider milik 
                         final sessionProvider = Provider.of<SessionProvider>(context, listen: false);
                         await sessionProvider.login(idUserStr, role);
 

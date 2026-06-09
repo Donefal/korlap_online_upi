@@ -131,6 +131,7 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
 
                         // Mapping data dari PeminjamanModel ke widget PeminjamanCard Anda
                         return PeminjamanCard(
+                          showAction: false,
                           item: PeminjamanItem(
                             id: peminjaman.id,
                             gedung: peminjaman.gedung,
@@ -141,9 +142,9 @@ class _StatusPeminjamanPageState extends State<StatusPeminjamanPage> {
                             start: peminjaman.waktuMulaiPeminjaman,
                             end: peminjaman.waktuAkhirPeminjaman,
                             date: peminjaman.tanggalPeminjaman,
-                            action: () {
-                              _moveToAction(peminjaman.id);
-                            },
+                            // action: () {
+                            //   _moveToAction(peminjaman.id);
+                            // },
                           ),
                         );
                       },

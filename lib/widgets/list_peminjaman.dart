@@ -32,7 +32,7 @@ class PeminjamanItem  {
 Color _tentukanColorStatus(String status) {
   return switch (status.toLowerCase()) {
     'diterima'                => Colors.green,
-    'tidak diterima'          => Colors.red,
+    'ditolak'          => Colors.red,
     'sedang diajukan'         => Colors.orange,
     _                         => Colors.black12,
   };
