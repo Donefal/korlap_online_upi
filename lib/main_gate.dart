@@ -8,7 +8,8 @@ import 'package:korlap_online_upi/pages/status/status_peminjaman.dart';
 import 'package:korlap_online_upi/widgets/index.dart';
 
 class MainGate extends StatefulWidget {
-  const MainGate({super.key});
+  final bool isAdmin;
+  const MainGate({super.key, this.isAdmin = false});
 
   @override
   State<MainGate> createState() => _MainGateState();
@@ -32,6 +33,7 @@ class _MainGateState extends State<MainGate> {
         onDestinationSelected: (index) {
           setState(() => _currentIndex = index);
         },
+        isAdmin: widget.isAdmin,
       ),
       body: _pages[_currentIndex],
     );

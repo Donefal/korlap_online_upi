@@ -96,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                       _isLoginLoading = true;
                     });
               
-                    // 3. PROSES LOGIN ASLI KE DATABASE
                     try {
                       final authService = AuthService();
                       
@@ -119,7 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                         // Lempar ke MainGate (MainGate akan otomatis mendeteksi role baru)
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const MainGate()),
+                          MaterialPageRoute(
+                            builder: (context) => MainGate(
+                              isAdmin: role == 'admin',
+                            )),
                         );
                       }
                     } catch (error) {
